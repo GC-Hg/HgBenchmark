@@ -1,0 +1,96 @@
+#==============================================================================
+# tracerinfo.dat: Created by GEOS-CHEM at 2011/09/21 23:33
+#
+# ****** CUSTOMIZED FOR Mercury SIMULATION *****
+#
+# This file contains name weight and index information about GEOS-CHEM
+# tracers.  It is read by routine "ctm_tracerinfo.pro" of the GAMAP package.
+#
+# File Format:
+# -----------------------------------------------------------------------------
+# NAME     (A8   )  Tracer name (up to 8 chars)
+#  --      (1X   )  1-character spacer
+# FULLNAME (A30  )  Full tracer name (up to 30 chars)
+# MOLWT    (E10.0)  Molecular weight (kg/mole)
+# C        (I3   )  For HC's: # moles C/moles tracer; otherwise set=1
+# TRACER   (I9   )  Tracer number (up to 9 digits)
+# SCALE    (E10.3)  Standard scale factor to convert to unit given below
+#  --      (1X   )  1-character spacer
+# UNIT     (A40  )  Unit string
+#
+#==============================================================================
+# GEOS-CHEM tracers [ppbv]
+#==============================================================================
+Hg0      Hg0 tracer                     2.010E-01  1        1 1.000E+12 pptv
+Hg2      Hg2 tracer                     2.010E-01  1        2 1.000E+12 pptv
+HgP      HgP tracer                     2.010E-01  1        3 1.000E+12 pptv
+#==============================================================================
+# GEOS-CHEM tracers [molec/cm2/s]
+#==============================================================================
+Hg0      Hg0 tracer                     2.010E-01  1     1001 1.000E+00 molec/cm2/s
+Hg2      Hg2 tracer                     2.010E-01  1     1002 1.000E+00 molec/cm2/s
+HgP      HgP tracer                     2.010E-01  1     1003 1.000E+00 molec/cm2/s
+#==============================================================================
+# GEOS-CHEM tracers [molec/cm2]
+#==============================================================================
+Hg0      Hg0 tracer                     2.010E-01  1     2001 1.000E+00 molec/cm2
+Hg2      Hg2 tracer                     2.010E-01  1     2002 1.000E+00 molec/cm2
+HgP      HgP tracer                     2.010E-01  1     2003 1.000E+00 molec/cm2
+#==============================================================================
+# GEOS-CHEM tracers [kg/s]
+#==============================================================================
+Hg0      Hg0 tracer                     2.010E-01  1     3001 1.000E+00 kg/s
+Hg2      Hg2 tracer                     2.010E-01  1     3002 1.000E+00 kg/s
+HgP      HgP tracer                     2.010E-01  1     3003 1.000E+00 kg/s
+#==============================================================================
+# GEOS-CHEM tracers [kg]
+#==============================================================================
+Hg0      Hg0 tracer                     2.010E-01  1     4001 1.000E+00 kg
+Hg2      Hg2 tracer                     2.010E-01  1     4002 1.000E+00 kg
+HgP      HgP tracer                     2.010E-01  1     4003 1.000E+00 kg
+#==============================================================================
+# ND03 diagnostic quantities
+#==============================================================================
+Hg0_an   Anthro elemental Hg            2.010E-01  1    34001 1.000E+00 kg
+Hg0_aq   Ocean mass of elemental Hg     2.010E-01  1    34002 1.000E+00 kg
+Hg0_oc   Ocean-emitted elemental Hg     2.010E-01  1    34003 1.000E+00 kg
+Hg0_ln   Land re-emitted elemental Hg   2.010E-01  1    34004 1.000E+00 kg
+Hg0_na   Natural land source            2.010E-01  1    34005 1.000E+00 kg
+Hg2_an   Anthro divalent Hg             2.010E-01  1    34006 1.000E+00 kg
+Hg2_aq   Ocean mass of divalent Hg      2.010E-01  1    34007 1.000E+00 kg
+Hg2_sk   Mass of Hg2 sunk in ocean      2.010E-01  1    34008 1.000E+00 kg
+HgP_an   Anthro particulate Hg          2.010E-01  1    34009 1.000E+00 kg
+Hgaq_tot Total oceanic mercury          0.000E+00  1    34010 1.000E+00 kg
+HgP_aq   Ocean mass of particulate Hg   2.010E-01  1    34011 1.000E+00 kg
+Hg_to_P  Hg converted to particulate    2.010E-01  1    34012 1.000E+00 kg/m2/s
+Hg_bb    Hg biomass burn emis           2.010E-01  1    34013 1.000E+00 kg
+Hg_vg    Hg vegetation emissions        2.010E-01  1    34014 1.000E+00 kg
+Hg_so    Hg soil emissions              2.010E-01  1    34015 1.000E+00 kg
+Hg_up    Hg ocean up flux               2.010E-01  1    34016 1.000E+00 kg
+Hg_down  Hg ocean downflux              2.010E-01  1    34017 1.000E+00 kg
+Hg0_snow Snow emission of Hg            2.010E-01  1    34018 1.000E+00 kg
+Hg2_Hg0  Prod of Hg2 from Hg0           2.010E-01  1    35001 1.000E+00 kg
+Hg2_OH   Prod of Hg2 from OH            2.010E-01  1    35002 1.000E+00 kg
+Hg2_O3   Prod of Hg2 from O3            2.010E-01  1    35003 1.000E+00 kg
+Hg2_SS   Loss of Hg2 from sea salt      2.010E-01  1    35004 1.000E+00 kg
+Hg2_SSR  Loss rate Hg2 from sea salt    2.010E-01  1    35005 1.000E+00 /s
+Hg2_Br   Prod of Hg2 from Br            2.010E-01  1    35006 1.000E+00 kg
+Br       Br concentration               2.010E-01  1    35007 1.000E+00 kg
+BrO      BrO concentration              2.010E-01  1    35008 1.000E+00 kg
+Fg       Hg2 gas fraction               2.010E-01  1    35009 1.000E+00 unitless
+Fp       Hg2 particle fraction          2.010E-01  1    35010 1.000E+00 unitless
+RPM      Reactive particulate mercury   2.010E-01  1    35011 1.000E+00 pptv
+RGM      Reactive gaseous mercury       2.010E-01  1    35012 1.000E+00 pptv
+Hg0      Oceanic Hg0                    2.010E-01  1    41001 1.000E+00 kg
+Hg2      Oceanic Hg2                    2.010E-01  1    41002 1.000E+00 kg
+HgP      Oceanic HgP                    2.010E-01  1    41003 1.000E+00 kg
+Snow_Hg  Tot. Hg in snowpack            2.010E-01  1    49001 1.000E+00 kg
+#==============================================================================
+# ND44 diagnostic quantities
+#==============================================================================
+Hg0df    Hg0 drydep flux                2.010E-01  1    36001 1.000E+00 molec/cm2/s
+Hg2df    Hg2 drydep flux                2.010E-01  1    36002 1.000E+00 molec/cm2/s
+HgPdf    HgP drydep flux                2.010E-01  1    36003 1.000E+00 molec/cm2/s
+Hg0dv    Hg0 drydep velocity            2.010E-01  1    37001 1.000E+00 cm/s
+Hg2dv    Hg2 drydep velocity            2.010E-01  1    37002 1.000E+00 cm/s
+HgPdv    HgP drydep velocity            2.010E-01  1    37003 1.000E+00 cm/s

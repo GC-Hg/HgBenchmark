@@ -1,0 +1,58 @@
+MERCURY BENCHMARKING SCRIPTS
+
+Developed by Bess Corbitt, Jenny Fisher, and Helen Amos
+Updated for 2x2.5 compatibility by Noelle Selin
+Based on original routines by Noelle Selin, Chris Holmes, Anne Soerensen
+(and likely others)
+
+Last updated 30 Nov 2011
+
+This directory contains a set of IDL scripts used to benchmark new and
+updated versions of the GEOS-Chem mercury model. The primary script
+used is MERCURY_BENCHMARK; this will call all other necessary routines.
+
+Also included are various data to which the model versions are compared
+(data/ directory) and saved GEOS-Chem fields (GEOS-Chem_fields/ 
+directory).
+
+To use these benchmarking scripts, you will need to define the 
+!BENCHMARK system variable as the location in your home directory where
+the benchmark directory will be stored. This can be done in an
+idl_startup file using the following lines:
+   benchmark = '/home/username/benchmark'
+   DefSysV, '!BENCHMARK',Exists=Exists
+   if (not Exists ) then DefSysV,'!BENCHMARK',BENCHMARK
+There may be other ways to do this as well.
+
+Included in this directory are tracerinfo.dat and diaginfo.dat files.
+However, you may want to replace these with the versions created by
+your simulations.
+
+The benchmarking scripts compare a "new" model run to a "reference"
+simulation. If no reference file is specified, the new run will be
+compared to the default file (included here) default.4x5.ctm.bpch. This
+file uses the model version documented in Amos et al. 2011 (currently 
+in revision for ACP) which is based on v9-01-01 but with a number of
+updates making it roughly reflective of v9-01-02. There is also a default
+2x2.5 file (default.2x2.5.ctm.bpch) that can be used instead, but you
+will need to specify this as the reference file since the 4x5 file is
+the default. The 2x2.5 file is also roughly reflective of v9-01-02 and
+was created by Noelle Selin.
+
+To run the benchmarking procedures, enter the following at an IDL prompt:
+   MERCURY_BENCHMARK, FILENAME=FILENAME, REFERENCE=REFERENCE, $
+      PSFILENAME=PSFILENAME, PPQ=PPQ, CHEMISTRY=CHEMISTRY
+
+Here, FILENAME is the name of the file containing output for the "new"
+run, REFERENCE is the name of the file containing output for the
+"reference" run, PSFILENAME is the name of the postscript in which the
+output will be saved (default is mercury_benchmark.ps), ppq allows you
+to plot all atmospheric data in ppq instead of the default ng/m3, and
+CHEMISTRY can be set to 'Br' (default) or 'OHO3' to reflect the
+chemistry used in your simulation.
+
+If you have questions, please contact
+Bess Corbitt: bess.corbitt@gmail.com
+Jenny Fisher: jafisher@fas.harvard.edu
+Helen Amos:   amos@fas.harvard.edu
+Noelle Selin: selin@mit.edu

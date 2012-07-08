@@ -186,7 +186,7 @@ pro plot_seasons_sites, FileName=FileName, $
    ctm_get_data, Hg2DataInfo, DiagN, FileName=Reference[F], Tracer=2L
 
    ; Gas fraction, if it exists
-   ctm_get_data, FgDataInfo, 'PL-HG2-$', FileName=FileName[F], Tracer=9L
+   ctm_get_data, FgDataInfo, 'PL-HG2-$', FileName=Reference[F], Tracer=9L
 
    for S=0L, nsites-1L do begin
 

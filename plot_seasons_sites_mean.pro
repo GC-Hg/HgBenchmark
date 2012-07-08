@@ -196,7 +196,7 @@ pro plot_seasons_sites_mean, FileName=FileName, $
       ctm_get_data, Hg2DataInfo, DiagN, FileName=Reference[F], Tracer=2L
 
       ; Gas fraction, if it exists
-      ctm_get_data, FgDataInfo, 'PL-HG2-$', FileName=FileName[F], Tracer=9L
+      ctm_get_data, FgDataInfo, 'PL-HG2-$', FileName=Reference[F], Tracer=9L
 
       ; Number of time steps in the DataInfo structures (should all be same)
       n_times = n_elements( Hg0DataInfo )

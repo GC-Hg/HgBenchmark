@@ -4,6 +4,7 @@ function get_mean_concentration, FileName=FileName, $
                            YearOut=YearOut, $
                            GridInfoOut=GridInfoOut, $
                            TGM=TGM, $
+                           ngm3=ngm3, $
                            _Extra=_Extra
    
 ; Get mean concentration, averaged over time
@@ -31,6 +32,9 @@ function get_mean_concentration, FileName=FileName, $
 
    ; Convert molec to kg
    molec2kg = 0.201 / 6.02d23
+
+   ; Convert ppt to ng/m3
+   pptv_ngm3 = 8.93d0
 
    ;=======================================
    ; Extract GEOS-Chem Data
@@ -103,6 +107,8 @@ function get_mean_concentration, FileName=FileName, $
 
    ; Concentration [pptv]
    Conc = SumConc / (SumTime/n_elements(species))
+
+   if keyword_set(ngm3) then conc=conc*pptv_ngm3
 
 return, Conc
 

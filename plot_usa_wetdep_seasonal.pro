@@ -229,10 +229,10 @@ pro plot_usa_wetdep_seasonal, FileName   = FileName  , $
       ; When using MDNmonthlys.sav
       ii = where( (abs(MDN.lat-CenterLat[J]) le 2 ) and $
                   (MDN.lon ge lonRange[0]) and (MDN.lon le lonRange[1]), ct )
-      jj = where( yearmatch )
+      jj = where( yearmatch, ct2 )
 
 
-      if (ct ge 1) then begin
+      if (ct ge 1 and ct2 ge 1) then begin
       
          ; When using MDNfullmonthly.sav
 ;         pMDN[J,*] = mean_nan( MDN.HgDep[ii, *], 1 )

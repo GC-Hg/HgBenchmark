@@ -7,6 +7,7 @@ function get_total_emission, FileName=FileName, $
                            total=total, $
                            PerDay=PerDay, $
                            noCheck=noCheck, $
+                           kg=kg, $
                            _Extra=_Extra
    
 ; Get total emissions for specified species and source
@@ -147,7 +148,8 @@ function get_total_emission, FileName=FileName, $
             SumDeltaTs = SumDeltaTs + deltaTs 
 
             ; Calculate Cumulative emission [ug/m2]
-            Emission = Emission + $
+            if keyword_set(kg) then Emission = Emission + *(DataInfo[iMonth].Data) $
+            else Emission = Emission + $
                      *(DataInfo[iMonth].Data) * kg2ug / area_m2
             
 

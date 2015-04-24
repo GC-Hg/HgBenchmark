@@ -76,11 +76,11 @@ function get_hg_obs, file=HGfile
 
 
    ; Replace missing data with NaN
-   ii=where( HGdat eq -9999, ct )
+   ii=where( HGdat eq 9.99, ct )
    if (ct ge 1) then begin
       HGdat[ii] =!values.f_nan
    endif
-   ii=where( HGstd eq -9999, ct )
+   ii=where( HGstd eq 9.99, ct )
    if (ct ge 1) then begin
       HGstd[ii] =!values.f_nan
    endif

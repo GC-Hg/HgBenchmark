@@ -234,9 +234,6 @@ PRO MERCURY_BENCHMARK, FILENAME=FILENAME, REFERENCE=REFERENCE, $
    ;mean northern hemisphere mid-latitude stations
    plot_seasons_sites_mean, filename=filename, reference=reference, ppq=ppq
 
-   ;mean northern hemisphere mid-latitude stations Hg0
-   plot_seasons_sites_mean_hg0, filename=filename, reference=reference, ppq=ppq
-
    ;all stations
    plot_seasons_sites, filename=filename, reference=reference, ppq=ppq
 
@@ -1052,14 +1049,14 @@ PRO MERCURY_BENCHMARK, FILENAME=FILENAME, REFERENCE=REFERENCE, $
    xyouts, 0.6, 7.5, 'SURFACE OCEAN MASS', color=1
    xyouts, 0.6, 7.2, string('Hg!u0!n:', string(old_Hg0ocmass/1d3/ofiles,format='(I10.0)')), color=1
    xyouts, 0.6, 6.9, string('Hg!u2!n:', string(old_Hg2ocmass/1d3/ofiles,format='(I10.0)')), color=1
-   xyouts, 0.6, 6.6, string('Hg!uC!n:', string(old_HgCocmass/1d3/ofiles,format='(I10.0)')), color=1
+   xyouts, 0.6, 6.6, string('Hg!uP!n:', string(old_HgCocmass/1d3/ofiles,format='(I10.0)')), color=1
    xyouts, 0.6, 6.0, 'EMISSIONS', color=1
    xyouts, 0.6, 5.7, string('Hg!u0!n anthro:', string(old_em_Hg0_anthro/1d3/ofiles,format='(I10.0)')), color=1
    xyouts, 0.6, 5.4, string('Hg!u2!n anthro:', string(old_em_Hg2_anthro/1d3/ofiles,format='(I10.0)')), color=1
    xyouts, 0.6, 5.1, string('Hg!uP!n anthro:', string(old_em_HgP_anthro/1d3/ofiles,format='(I10.0)')), color=1
    xyouts, 0.6, 4.8, string('Hg!u0!n geo:', string(old_em_Hg0_geo/1d3/ofiles,format='(I10.0)')), color=1
-   xyouts, 0.6, 4.5, string('Hg!u2!n soil:', string(old_em_Hg0_soil/1d3/ofiles,format='(I10.0)')), color=1
-   xyouts, 0.6, 4.2, string('Hg!uP!n bb:', string(old_em_Hg0_BB/1d3/ofiles,format='(I10.0)')), color=1
+   xyouts, 0.6, 4.5, string('Hg!u0!n soil:', string(old_em_Hg0_soil/1d3/ofiles,format='(I10.0)')), color=1
+   xyouts, 0.6, 4.2, string('Hg!u0!n bb:', string(old_em_Hg0_BB/1d3/ofiles,format='(I10.0)')), color=1
    xyouts, 0.6, 3.9, string('Hg!u0!n land re:', string(old_em_Hg0_land/1d3/ofiles,format='(I10.0)')), color=1
    xyouts, 0.6, 3.6, string('Hg!u0!n snow:', string(old_em_Hg0_snow/1d3/ofiles,format='(I10.0)')), color=1
    xyouts, 0.6, 3.3, string('Hg!u0!n oc evasion:', string(old_em_Hg0_oc_up/1d3/ofiles,format='(I10.0)')), color=1

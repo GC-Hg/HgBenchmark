@@ -125,7 +125,17 @@ pro plot_seasons_sites, FileName=FileName, $
       J = J-1L
 
       ; Zeppelin is at altitude...
-      if (TGMSite[S] eq 'Zeppelin') then lev=3 else lev=0
+      ; Also several other sites ;sjs, 4/22/15
+      case TGMSite[S] of
+         'Zeppelin' : lev=3
+         'Andoya' : lev=2
+         'MtBachelor' : lev=16
+         'Waliguan' : lev=1
+         'NamCoLake' : lev=18
+         'MtLulin' : lev=16
+         'MaunaLoa' : lev=18
+         else : lev=0
+      endcase
 
       for iMonth=0L, n_times-1L do begin
 
@@ -199,7 +209,17 @@ pro plot_seasons_sites, FileName=FileName, $
       J = J-1L
 
       ; Zeppelin is at altitude...
-      if (TGMSite[S] eq 'Zeppelin') then lev=3 else lev=0
+      ; Also several other sites ;sjs, 4/22/15
+      case TGMSite[S] of
+         'Zeppelin' : lev=3
+         'Andoya' : lev=2
+         'MtBachelor' : lev=16
+         'Waliguan' : lev=1
+         'NamCoLake' : lev=18
+         'MtLulin' : lev=16
+         'MaunaLoa' : lev=18
+         else : lev=0
+      endcase
 
       for iMonth=0L, n_times-1L do begin
 
@@ -246,7 +266,8 @@ pro plot_seasons_sites, FileName=FileName, $
    If Keyword_Set( PS ) then $
       ps_setup, /open, file=psFileName, xsize=10, ysize=7, /landscape
 
-   multipanel, nplots=nsites, margin=0.03, pos=p
+   multipanel, nplots=nsites, margin=0.02, omargin=[0.03,0.0,0.0,0.0], $
+               pos=p
  
    ; First letter of each month
    monthstr=['J','F','M','A','M','J','J','A','S','O','N','D']   
@@ -266,6 +287,9 @@ pro plot_seasons_sites, FileName=FileName, $
          ytitle1 = 'Hg(0) [ng/m!u3!n]'
          ytitle2 = 'TGM [ng/m!u3!n]'
       endelse
+
+      ; Larger yrange for some sites ;sjs, 4/23/15
+      if (TGMsite[S] eq 'ShangriLa') then yrange = [1.0, 3.2]
       
       ; Use smaller range for Southern Hemisphere
       if (keyword_set(ppq)) then begin
@@ -282,11 +306,11 @@ pro plot_seasons_sites, FileName=FileName, $
             ytitle=ytitle1, $ 
             xrange=[-0.5,11.5], yrange=yrange, /xstyle, /ystyle, $ 
       xticks=11, xtickv=indgen(12), xtickname=monthstr, $
-      yminor=2, ticklen=0.01, thick=3.0, charsize=1.5, $
+      yminor=2, ticklen=0.01, thick=3.0, charsize=1.2, $
             title=TGMsite[S], pos=p
-      oplot, TGMdat[S,*], color=!myct.gray50, thick=3
+      oplot, TGMdat[S,*], color=!myct.gray67, thick=3
       errplot, TGMdat[S,*]-TGMstd[S,*], TGMdat[S,*]+TGMstd[S,*], $
-               color=!myct.gray50, thick=3
+               color=!myct.gray67, thick=3
       oplot, Hg0mod[S,*], color=3, thick=3
       oplot, Hg0ref[S,*], color=6, thick=3
 
@@ -296,7 +320,7 @@ pro plot_seasons_sites, FileName=FileName, $
             ytitle=ytitle2, $
             xrange=[-0.5,11.5], yrange=yrange, /xstyle, /ystyle, $
       xticks=11, xtickv=indgen(12), xtickname=monthstr, $
-      yminor=2, ticklen=0.01, thick=3.0, charsize=1.5, $
+      yminor=2, ticklen=0.01, thick=3.0, charsize=1.2, $
             title=TGMsite[S], pos=p
       oplot, TGMdat[S,*], color=!myct.black, thick=3
       errplot, TGMdat[S,*]-TGMstd[S,*], TGMdat[S,*]+TGMstd[S,*], $
@@ -323,12 +347,12 @@ pro plot_seasons_sites, FileName=FileName, $
 
    if (keyword_set(reference)) then begin
    legend, label=ref_label, $
-      lcolor=[1, !myct.gray50, 2, 3, 4, 6], line=fltarr(6), thick=3, $
-      halign=0.8, valign=-0.15, charsize=0.75
+      lcolor=[1, !myct.gray67, 2, 3, 4, 6], line=fltarr(6), thick=3, $
+      halign=0.90, valign=-0.10, charsize=0.75
    endif else begin
    legend, label=standard_label, $                                                  
-      lcolor=[1, !myct.gray50, 2, 3], line=fltarr(4), thick=3, $
-      halign=0.8, valign=-0.15, charsize=0.75
+      lcolor=[1, !myct.gray67, 2, 3], line=fltarr(4), thick=3, $
+      halign=0.90, valign=-0.10, charsize=0.75
    endelse
 
    If Keyword_Set( PS ) then $

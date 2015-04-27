@@ -95,10 +95,11 @@ pro plot_seasons_sites_mean, FileName=FileName, $
    TGMstd=TGMstd[ii,*]
    IDHg0=IDHg0[ii]
 
-   SitesToAverage = ['Andoya', 'Pallas', 'Birkenes', 'Lista', 'Roervik/Raaoe', $
-                     'Zingst', 'MaceHead', 'Langenbruegge', 'CheekaPeak', $
-                     'St.Anicet', 'St.Andrews', 'Kejimkujik', 'AthensOH', $
-                     'PensacolaOLF', 'ReifelIsland' ]
+   SitesToAverage = ['Birkenes', 'MaceHead', 'Waldhof', 'BrattLake', $
+                     'Saturna', 'Underhill', 'Kejimkujik', 'Egbert', $
+                     'Huntington', 'ThompsonFarm', 'PineyReservoir', $
+                     'Athens', 'SantaCruz', 'Stiwell', 'Yorkville', $
+                     'GrandBay' ]
 
    ;=======================================
    ; Read BPCH data
@@ -142,7 +143,17 @@ pro plot_seasons_sites_mean, FileName=FileName, $
          GRIDindex[S] = I * 10000L + J
 
          ; Zeppelin is at altitude...
-         if (TGMSite[S] eq 'Zeppelin') then lev=3 else lev=0
+         ; Also several other sites ;sjs, 4/22/15
+         case TGMSite[S] of
+            'Zeppelin' : lev=3
+            'Andoya' : lev=2
+            'MtBachelor' : lev=16
+            'Waliguan' : lev=1
+            'NamCoLake' : lev=18
+            'MtLulin' : lev=16
+            'MaunaLoa' : lev=18
+            else : lev=0
+         endcase
 
          for iMonth=0L, n_times-1L do begin
 
@@ -211,7 +222,17 @@ pro plot_seasons_sites_mean, FileName=FileName, $
       for S=0L, nSites-1L do begin
 
          ; Zeppelin is at altitude...
-         if (TGMSite[S] eq 'Zeppelin') then lev=3 else lev=0
+         ; Also several other sites ;sjs, 4/22/15
+         case TGMSite[S] of
+            'Zeppelin' : lev=3
+            'Andoya' : lev=2
+            'MtBachelor' : lev=16
+            'Waliguan' : lev=1
+            'NamCoLake' : lev=18
+            'MtLulin' : lev=16
+            'MaunaLoa' : lev=18
+            else : lev=0
+         endcase
 
          ; Get index of site, Fortran notation
          ctm_index, ModelInfo, I, J, $
@@ -315,32 +336,32 @@ pro plot_seasons_sites_mean, FileName=FileName, $
    ;------------------------
    ; Northern mid-latitudes
    ;------------------------
-   plot, mean2( TGMdat_midlat, 1 ), /color, /nodata, $
+   plot, mean2(TGMdat_midlat,1,/nan), /color, /nodata, $
             ytitle=ytitle,     $
             xrange=[-0.5,11.5], yrange=nh_range, /xstyle, /ystyle, $ 
             xticks=11, xtickv=indgen(12), xtickname=monthstr, $
             yminor=2, ticklen=0.01, thick=3.0,  $
             title='Mid-latitudes', pos=p
 
-   oplot, mean2(TGMdat_midlat, 1), /color, thick=3
+   oplot, mean2(TGMdat_midlat,1,/nan), /color, thick=3
    
 ;   for S=0L, nAvg-1L do $
 ;      oplot, TGMdat_midlat[S, * ], color=S + 1
 
-   errplot, mean2( TGMdat_midlat, 1) - stddev2( TGMdat_midlat, 1), $
-            mean2( TGMdat_midlat, 1) + stddev2( TGMdat_midlat, 1), $
+   errplot, mean2(TGMdat_midlat,1,/nan) - stddev2(TGMdat_midlat,1,/nan), $
+            mean2(TGMdat_midlat,1,/nan) + stddev2(TGMdat_midlat,1,/nan), $
             /color, thick=3
 
-   oplot, mean2( TGMmod_midlat, 1 ), color=2, thick=3
-   errplot, mean2( TGMmod_midlat, 1) - stddev2(TGMmod_midlat, 1), $
-            mean2( TGMmod_midlat, 1) + stddev2(TGMmod_midlat, 1), $
+   oplot, mean2(TGMmod_midlat,1,/nan), color=2, thick=3
+   errplot, mean2(TGMmod_midlat,1,/nan) - stddev2(TGMmod_midlat,1,/nan), $
+            mean2(TGMmod_midlat,1,/nan) + stddev2(TGMmod_midlat,1,/nan), $
             color=2, thick=3
 
    ;eds 5/11/11
    if (keyword_set(reference)) then begin
-   oplot, mean2( TGMref_midlat, 1 ), color=4, thick=3
-   errplot, mean2( TGMref_midlat, 1) - stddev2(TGMref_midlat, 1), $
-            mean2( TGMref_midlat, 1) + stddev2(TGMref_midlat, 1), $
+   oplot, mean2(TGMref_midlat,1,/nan), color=4, thick=3
+   errplot, mean2(TGMref_midlat,1,/nan) - stddev2(TGMref_midlat,1,/nan), $
+            mean2(TGMref_midlat,1,/nan) + stddev2(TGMref_midlat,1,/nan), $
             color=4, thick=3
    endif
 
@@ -363,7 +384,7 @@ pro plot_seasons_sites_mean, FileName=FileName, $
    ; Arctic
    ;------------------------
 
-   sites = ['Alert', 'Zeppelin', 'Amderma']
+   sites = ['Alert', 'Zeppelin', 'Andoya', 'Amderma']
    
    multipanel, /advance, pos=p
    
@@ -372,9 +393,9 @@ pro plot_seasons_sites_mean, FileName=FileName, $
          yrange=nh_range, yminor=2, /xstyle, /ystyle, ytitle=ytitle, $ ;eds 5/11/11
          ticklen=0.01, pos=p
 
-   TGMdat_arctic = fltarr( 3, 12 )
-   TGMmod_arctic = fltarr( 3, 12 )
-   TGMref_arctic = fltarr( 3, 12 ) ;eds 5/11/11
+   TGMdat_arctic = fltarr( 4, 12 )
+   TGMmod_arctic = fltarr( 4, 12 )
+   TGMref_arctic = fltarr( 4, 12 ) ;eds 5/11/11
    
    for S=0L, n_elements( sites ) -1L do begin
       i = where( TGMsite eq sites[S] )
@@ -387,22 +408,22 @@ pro plot_seasons_sites_mean, FileName=FileName, $
       endif
    endfor
 
-   oplot, mean2( TGMmod_arctic, 1), color=2, thick=3
-   oplot, mean2( TGMdat_arctic, 1), /color, thick=3
-   errplot, mean2( TGMdat_arctic, 1) - stddev2( TGMdat_arctic, 1), $
-            mean2( TGMdat_arctic, 1) + stddev2( TGMdat_arctic, 1), $
+   oplot, mean2(TGMmod_arctic,1,/nan), color=2, thick=3
+   oplot, mean2(TGMdat_arctic,1,/nan), /color, thick=3
+   errplot, mean2(TGMdat_arctic,1,/nan) - stddev2(TGMdat_arctic,1,/nan), $
+            mean2(TGMdat_arctic,1,/nan) + stddev2(TGMdat_arctic,1,/nan), $
             /color, thick=3
 
-   oplot, mean2( TGMmod_arctic, 1 ), color=2, thick=3
-   errplot, mean2( TGMmod_arctic, 1) - stddev2(TGMmod_arctic, 1), $
-            mean2( TGMmod_arctic, 1) + stddev2(TGMmod_arctic, 1), $
+   oplot, mean2(TGMmod_arctic,1,/nan), color=2, thick=3
+   errplot, mean2(TGMmod_arctic,1,/nan) - stddev2(TGMmod_arctic,1,/nan), $
+            mean2(TGMmod_arctic,1,/nan) + stddev2(TGMmod_arctic,1,/nan), $
             color=2, thick=3
 
    ;eds 5/11/11
    if (keyword_set(reference)) then begin
-   oplot, mean2( TGMref_arctic, 1 ), color=4, thick=3
-   errplot, mean2( TGMref_arctic, 1) - stddev2(TGMref_arctic, 1), $
-            mean2( TGMref_arctic, 1) + stddev2(TGMref_arctic, 1), $
+   oplot, mean2(TGMref_arctic,1,/nan), color=4, thick=3
+   errplot, mean2(TGMref_arctic,1,/nan) - stddev2(TGMref_arctic,1,/nan), $
+            mean2(TGMref_arctic,1,/nan) + stddev2(TGMref_arctic,1,/nan), $
             color=4, thick=3
    endif
 
@@ -427,7 +448,7 @@ pro plot_seasons_sites_mean, FileName=FileName, $
 
    multipanel, /advance, pos=p
    
-   i = where( TGMsite eq 'CapePointClean' )
+   i = where( TGMsite eq 'CapePoint' )
    plot, TGMdat[i, *], /color, thick=3, title='Cape Point', $
          xrange=[-0.5,11.5], xticks=11, xtickv=indgen(12), xtickname=monthstr, $
          yrange=sh_range, yminor=2, /xstyle, /ystyle, ytitle=ytitle, $ ;eds 5/11/11
@@ -442,13 +463,13 @@ pro plot_seasons_sites_mean, FileName=FileName, $
 
 
    ;------------------------
-   ; Southern hemisphere- Neumayer
+   ; Southern hemisphere- Troll
    ;------------------------
 
    multipanel, /advance, pos=p
    
-   i = where( TGMsite eq 'Neumayer' )
-   plot, TGMdat[i, *], /color, thick=3, title='Neumayer Station', $
+   i = where( TGMsite eq 'Troll' )
+   plot, TGMdat[i, *], /color, thick=3, title='Troll Research Station', $
          xrange=[-0.5,11.5], xticks=11, xtickv=indgen(12), xtickname=monthstr, $
          yrange=sh_range, yminor=2, /xstyle, /ystyle, ytitle=ytitle, $ /eds 5/11/11
          ticklen=0.01, pos=p

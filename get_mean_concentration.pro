@@ -9,8 +9,9 @@ function get_mean_concentration, FileName=FileName, $
    
 ; Get mean concentration, averaged over time
 ; Return the result as pptv
-; TGM is returned as TGM = Hg0 + Fg*HgII
-; If Fg is undefined in output, then Fg=0.5
+; hmh 7/28/15 Hg2 tracer is gas-phase only as of v9-02, removed
+; obsolete Fg
+; TGM is returned as TGM = Hg0 + Hg2
 
    ;=======================================
    ; Setup
@@ -57,10 +58,6 @@ function get_mean_concentration, FileName=FileName, $
       ctm_get_data, DataInfo, 'IJ-AVG-$', Filename=filename[F], $
                     Tracer=Tracer
 
-      ; Gas fraction [unitless] if it exists
-      ctm_get_data, DataInfo_Fg, 'PL-HG2-$',Filename=filename[F],$
-                    Tracer=9
-
       ; Number of time steps in the DataInfo structures (should all be same)
       n_times = n_elements( DataInfo )
    
@@ -88,13 +85,8 @@ function get_mean_concentration, FileName=FileName, $
             deltaTs  = (Tau1-Tau0) * 3600.
 
             ; Cumulative concentration [pptv*s]
-            if (keyword_set(TGM) and tracer eq 2) then begin
-               ; Read HgII gas fraction if available
-               if (n_elements(DataInfo_Fg) gt 0) then $
-                  Fg=*(DataInfo_Fg[iMonth].Data) else $
-                  Fg = 0.5 
-               SumConc = SumConc +  *(DataInfo[iMonth].Data)* Fg * deltaTs
-            endif else SumConc = SumConc +  *(DataInfo[iMonth].Data) * deltaTs
+            ; hmh 7/28/15 removed Fg to properly use gas-phase Hg2 tracer as of v9-02
+            SumConc = SumConc +  *(DataInfo[iMonth].Data) * deltaTs
 
             ; Cumulative seconds
             SumTime = SumTime + deltaTs

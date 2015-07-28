@@ -111,8 +111,6 @@ pro plot_seasons_sites, FileName=FileName, $
    ctm_get_data, Hg0DataInfo, DiagN, FileName=FileName[F], Tracer=1L
    ctm_get_data, Hg2DataInfo, DiagN, FileName=FileName[F], Tracer=2L
 
-   ; Gas fraction, if it exists
-   ctm_get_data, FgDataInfo, 'PL-HG2-$', FileName=FileName[F], Tracer=9L
 
    for S=0L, nsites-1L do begin
       
@@ -139,15 +137,11 @@ pro plot_seasons_sites, FileName=FileName, $
 
       for iMonth=0L, n_times-1L do begin
 
-         ; Read or set HgII gas fraction
-         if ( n_elements(FgDataInfo) gt 0 ) then $
-            Fg=(*( FgDataInfo[iMonth].Data))[I,J,lev] else $
-            Fg=0.5
-
          ; TGM concentration in the model, pptv
+         ; hmh 7/28/15 removed Fg to properly use gas-phase Hg2 tracer as of v9-02
          TGMmod[S, iMonth] = TGMmod[S, iMonth] + $
                   ( (*( Hg0Datainfo[iMonth].Data))[I, J, lev] + $
-                    Fg*(*( Hg2Datainfo[iMonth].Data))[I, J, lev] )
+                    (*( Hg2Datainfo[iMonth].Data))[I, J, lev] )
          ; Hg0 concentration in the model, pptv
          HG0mod[S, iMonth] = HG0mod[S, iMonth] + $
                              (*( Hg0Datainfo[iMonth].Data))[I, J, lev]
@@ -195,8 +189,6 @@ pro plot_seasons_sites, FileName=FileName, $
    ctm_get_data, Hg0DataInfo, DiagN, FileName=Reference[F], Tracer=1L
    ctm_get_data, Hg2DataInfo, DiagN, FileName=Reference[F], Tracer=2L
 
-   ; Gas fraction, if it exists
-   ctm_get_data, FgDataInfo, 'PL-HG2-$', FileName=Reference[F], Tracer=9L
 
    for S=0L, nsites-1L do begin
 
@@ -223,15 +215,12 @@ pro plot_seasons_sites, FileName=FileName, $
 
       for iMonth=0L, n_times-1L do begin
 
-         ; Read or set HgII gas fraction
-         if ( n_elements(FgDataInfo) gt 0 ) then $
-            Fg=(*( FgDataInfo[iMonth].Data))[I,J,lev] else $
-            Fg=0.5
 
          ; TGM concentration in the model, pptv
+         ; hmh 7/28/15 removed Fg to properly use gas-phase Hg2 tracer as of v9-02
          TGMref[S, iMonth] = TGMref[S, iMonth] + $
                   ( (*( Hg0Datainfo[iMonth].Data))[I, J, lev] + $
-                    Fg*(*( Hg2Datainfo[iMonth].Data))[I, J, lev] )
+                    (*( Hg2Datainfo[iMonth].Data))[I, J, lev] )
          ; Hg0 concentration in the model, pptv
          HG0ref[S, iMonth] = HG0ref[S, iMonth] + $
                              (*( Hg0Datainfo[iMonth].Data))[I, J, lev]

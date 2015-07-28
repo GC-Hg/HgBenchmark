@@ -38,7 +38,7 @@
 ; MODIFICATION HISTORY:
 ;        cdh, 10 Mar 2009: VERSION 1.00
 ;        eds, 11 May 2011: modified for mercury benchmarking
-;
+;        hmh, 28 Jul 2015: removed references to obsolete Fg
 ;-
 ; Copyright (C) 2009, Christopher Holmes, Harvard University
 ; This software is provided as is without any warranty whatsoever.
@@ -195,15 +195,8 @@
    ctm_get_data, Hg0DataInfo, DiagN, FileName=FileName[F], Tracer=1L
    ctm_get_data, Hg2DataInfo, DiagN, FileName=FileName[F], Tracer=2L
 
-   ; Gas fraction, if it exists
-   ctm_get_data, FgDataInfo, 'PL-HG2-$', FileName=FileName[F], Tracer=9L
    
       for iMonth=0L, n_times-1L do begin
-
-         ; Read or set HgII gas fraction
-         if ( n_elements(FgDataInfo) gt 0 ) then $
-            Fg=(*( FgDataInfo[iMonth].Data))[*,*,0] else $
-            Fg=0.5
 
          ; Start and end times of data entry [hr]
          tau0 = Hg0DataInfo[iMonth].Tau0
@@ -213,9 +206,10 @@
          deltaTs  = (Tau1-Tau0) * 3600.
 
          ; Calculate mean concentration
+         ; hmh 7/28/15 removed Fg to properly use gas-phase Hg2 tracer as of v9-02
          Model_mean = Model_mean + deltaTs * $
                      ( (*( Hg0Datainfo[iMonth].Data))[*, *, 0] + $
-                       Fg * (*( Hg2Datainfo[iMonth].Data))[*, *, 0] )
+                         (*( Hg2Datainfo[iMonth].Data))[*, *, 0] )
       
          ; sum of weights
          sum_deltaTs = sum_deltaTs + deltaTs
@@ -262,15 +256,8 @@
    ctm_get_data, Hg0DataInfo, DiagN, FileName=Reference[F], Tracer=1L
    ctm_get_data, Hg2DataInfo, DiagN, FileName=Reference[F], Tracer=2L
 
-   ; Gas fraction, if it exists
-   ctm_get_data, FgDataInfo, 'PL-HG2-$', FileName=FileName[F], Tracer=9L
    
       for iMonth=0L, n_times-1L do begin
-
-         ; Read or set HgII gas fraction
-         if ( n_elements(FgDataInfo) gt 0 ) then $
-            Fg=(*( FgDataInfo[iMonth].Data))[*,*,0] else $
-            Fg=0.5
 
          ; Start and end times of data entry [hr]
          tau0 = Hg0DataInfo[iMonth].Tau0
@@ -282,7 +269,7 @@
          ; Calculate mean concentration
          Ref_mean = Ref_mean + deltaTs * $
                      ( (*( Hg0Datainfo[iMonth].Data))[*, *, 0] + $
-                       Fg * (*( Hg2Datainfo[iMonth].Data))[*, *, 0] )
+                       (*( Hg2Datainfo[iMonth].Data))[*, *, 0] )
 
          ; sum of weights
          sum_deltaTs = sum_deltaTs + deltaTs

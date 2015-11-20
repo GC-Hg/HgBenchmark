@@ -102,7 +102,7 @@ tvmap_region, Region=Region, $
   c_levels=clev, $
   title=PageTitle, /ystyle, $
   csfac=0.65, tcsfac=1.5, /continents, Log=Log, $
-  /nogx, /nogy, $
+  /nogx, /nogy, /iso, $
   /robinson, /horizon, $
   /cbar, div=5, /triangle, $
   unit=unit, botoutofrange=!myct.bottom, $
@@ -116,7 +116,7 @@ tvmap_region, Region=Region, $
   c_levels=clev, $
   title=PageTitle, /ystyle, $
   csfac=0.65, tcsfac=1.5, /continents, Log=Log, $
-  /nogx, /nogy, $
+  /nogx, /nogy, /iso, $
   /robinson, /horizon, $
   /cbar, div=5, /triangle, $
   unit=unit, botoutofrange=!myct.bottom, $
@@ -130,7 +130,7 @@ tvmap_region, Region=Region, $
   c_levels=clev, $
   title=PageTitle, /ystyle, $
   csfac=0.65, tcsfac=1.5, /continents, Log=Log, $
-  /nogx, /nogy, $
+  /nogx, /nogy, /iso, $
   /robinson, /horizon, $
   /cbar, div=5, /triangle, $
   unit=unit, botoutofrange=!myct.bottom, $
@@ -144,7 +144,7 @@ tvmap_region, Region=Region, $
   c_levels=clev, $
   title=PageTitle, /ystyle, $
   csfac=0.65, tcsfac=1.5, /continents, Log=Log, $
-  /nogx, /nogy, $
+  /nogx, /nogy, /iso, $
   /robinson, /horizon, $
   /cbar, div=5, /triangle, $
   unit=unit, botoutofrange=!myct.bottom, $

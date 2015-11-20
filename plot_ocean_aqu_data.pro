@@ -237,7 +237,7 @@ tvmap_region, Region=Region, $
   Hg0_SON, Hg0_Lon_SON, Hg0_Lat_SON, t_symbol=1, $
   title=PageTitle, /ystyle, $
   csfac=1, tcsfac=1, /continents, Log=Log, $
-  /nogx, /nogy, $
+  /nogx, /nogy, /iso, $
   /robinson, /horizon, $
   /cbar, div=5, /triangle, $
   unit=unit, /cfill, botoutofrange=!myct.bottom, $

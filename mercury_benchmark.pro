@@ -110,8 +110,9 @@ PRO MERCURY_BENCHMARK, FILENAME=FILENAME, REFERENCE=REFERENCE, $
       psfilename = 'mercury_benchmark.ps'
 
    ;open postscript file
-   ps_setup, /open, file=psfilename, xsize=10, ysize=6, psopen=psopen, $
-      /landscape
+   ;ps_setup, /open, file=psfilename, xsize=10, ysize=6, psopen=psopen, $
+;      /landscape
+   ps_setup, /open, file=psfilename, psopen=psopen
 
    ;----------------------------------;
    ;                                  ;
@@ -126,6 +127,7 @@ PRO MERCURY_BENCHMARK, FILENAME=FILENAME, REFERENCE=REFERENCE, $
    plot_surface_mean_TGM, filename=filename, /iso, $
       pagetitle='New Model Version: Surface TGM', $
       ppq=ppq
+
    ; also plot reference for quantitative comparison with sites
    plot_surface_mean_TGM, filename=reference, /iso, $
       pagetitle='Old Model Version: Surface TGM', $
@@ -263,10 +265,10 @@ PRO MERCURY_BENCHMARK, FILENAME=FILENAME, REFERENCE=REFERENCE, $
    ; WET DEPOSITION
 
    ;plot usa wetdep with mdn data
-   plot_usa_wetdep, FileName=FileName
+   plot_usa_wetdep, FileName=FileName, /nearest_year
 
    ;plot seasonal usa wetdep with mdn data
-   plot_usa_wetdep_seasonal,  FileName =  FileName,  Reference= Reference
+   plot_usa_wetdep_seasonal,  FileName =  FileName,  Reference= Reference, /nearest_year
 
    ;plot europe wetdep with emep data
    plot_europe_wetdep, FileName=FileName, /nearest_year
@@ -1036,6 +1038,7 @@ PRO MERCURY_BENCHMARK, FILENAME=FILENAME, REFERENCE=REFERENCE, $
    dummy=fltarr(72,46)
    myct,/whgrylrd,n_colors=17
    tvmap, dummy, /noborder, /nogx, /nogy
+   !p.charsize=1.
 
    ; number of files 
    ofiles = n_elements( Reference)
@@ -1043,81 +1046,81 @@ PRO MERCURY_BENCHMARK, FILENAME=FILENAME, REFERENCE=REFERENCE, $
 
    xyouts, 0.6, 9.5, 'OLD MODEL VERSION', color=1
    xyouts, 0.6, 9.0, 'TROPOSPHERIC MASS', color=1
-   xyouts, 0.6, 8.7, string('Hg!u0!n:', string(old_Hg0masstrop/1d3/ofiles,format='(I10.0)')), color=1
-   xyouts, 0.6, 8.4, string('Hg!u2!n:', string(old_Hg2masstrop/1d3/ofiles,format='(I10.0)')), color=1
-   xyouts, 0.6, 8.1, string('Hg!uP!n:', string(old_HgPmasstrop/1d3/ofiles,format='(I10.0)')), color=1
+   xyouts, 0.6, 8.7, string('Hg!u0!n:', string(old_Hg0masstrop/1d3/ofiles,format='(I7.0)')), color=1
+   xyouts, 0.6, 8.4, string('Hg!u2!n:', string(old_Hg2masstrop/1d3/ofiles,format='(I7.0)')), color=1
+   xyouts, 0.6, 8.1, string('Hg!uP!n:', string(old_HgPmasstrop/1d3/ofiles,format='(I7.0)')), color=1
    xyouts, 0.6, 7.5, 'SURFACE OCEAN MASS', color=1
-   xyouts, 0.6, 7.2, string('Hg!u0!n:', string(old_Hg0ocmass/1d3/ofiles,format='(I10.0)')), color=1
-   xyouts, 0.6, 6.9, string('Hg!u2!n:', string(old_Hg2ocmass/1d3/ofiles,format='(I10.0)')), color=1
-   xyouts, 0.6, 6.6, string('Hg!uP!n:', string(old_HgCocmass/1d3/ofiles,format='(I10.0)')), color=1
+   xyouts, 0.6, 7.2, string('Hg!u0!n:', string(old_Hg0ocmass/1d3/ofiles,format='(I7.0)')), color=1
+   xyouts, 0.6, 6.9, string('Hg!u2!n:', string(old_Hg2ocmass/1d3/ofiles,format='(I7.0)')), color=1
+   xyouts, 0.6, 6.6, string('Hg!uP!n:', string(old_HgCocmass/1d3/ofiles,format='(I7.0)')), color=1
    xyouts, 0.6, 6.0, 'EMISSIONS', color=1
-   xyouts, 0.6, 5.7, string('Hg!u0!n anthro:', string(old_em_Hg0_anthro/1d3/ofiles,format='(I10.0)')), color=1
-   xyouts, 0.6, 5.4, string('Hg!u2!n anthro:', string(old_em_Hg2_anthro/1d3/ofiles,format='(I10.0)')), color=1
-   xyouts, 0.6, 5.1, string('Hg!uP!n anthro:', string(old_em_HgP_anthro/1d3/ofiles,format='(I10.0)')), color=1
-   xyouts, 0.6, 4.8, string('Hg!u0!n geo:', string(old_em_Hg0_geo/1d3/ofiles,format='(I10.0)')), color=1
-   xyouts, 0.6, 4.5, string('Hg!u0!n soil:', string(old_em_Hg0_soil/1d3/ofiles,format='(I10.0)')), color=1
-   xyouts, 0.6, 4.2, string('Hg!u0!n bb:', string(old_em_Hg0_BB/1d3/ofiles,format='(I10.0)')), color=1
-   xyouts, 0.6, 3.9, string('Hg!u0!n land re:', string(old_em_Hg0_land/1d3/ofiles,format='(I10.0)')), color=1
-   xyouts, 0.6, 3.6, string('Hg!u0!n snow:', string(old_em_Hg0_snow/1d3/ofiles,format='(I10.0)')), color=1
-   xyouts, 0.6, 3.3, string('Hg!u0!n oc evasion:', string(old_em_Hg0_oc_up/1d3/ofiles,format='(I10.0)')), color=1
-   xyouts, 0.6, 3.0, string('TOTAL EMISSIONS:', string(old_em_total/1d3/ofiles,format='(I10.0)')), color=1
-   xyouts, 4.0, 9.0, 'DEPOSITION', color=1
-   xyouts, 4.0, 8.7, string('Hg!u0!n dd:', string(old_Hg0DryD/1d3/ofiles,format='(I10.0)')), color=1
-   xyouts, 4.0, 8.4, string('Hg!u2!n dd:', string(old_Hg2DryD/1d3/ofiles,format='(I10.0)')), color=1
-   xyouts, 4.0, 8.1, string('Hg!uP!n dd:', string(old_HgPDryD/1d3/ofiles,format='(I10.0)')), color=1
-   xyouts, 4.0, 7.8, string('Hg!u2!n wd:', string(old_Hg2Wet/1d3/ofiles,format='(I10.0)')), color=1
-   xyouts, 4.0, 7.5, string('Hg!uP!n wd:', string(old_HgPWet/1d3/ofiles,format='(I10.0)')), color=1
-   xyouts, 4.0, 7.2, string('Hg!u0!n oc uptake:', string(old_em_Hg0_oc_dn/1d3/ofiles,format='(I10.0)')), color=1
-   xyouts, 4.0, 6.9, string('Hg!u2!n seasalt:', string(old_pl_Hg_seasalt/1d3/ofiles,format='(I10.0)')), color=1
-   xyouts, 4.0, 6.6, string('TOTAL DEPOSITION:', string(old_dep_total/1d3/ofiles,format='(I10.0)')), color=1
-   xyouts, 4.0, 6.0, 'REDOX', color=1
+   xyouts, 0.6, 5.7, string('Hg!u0!n anthro:', string(old_em_Hg0_anthro/1d3/ofiles,format='(I7.0)')), color=1
+   xyouts, 0.6, 5.4, string('Hg!u2!n anthro:', string(old_em_Hg2_anthro/1d3/ofiles,format='(I7.0)')), color=1
+   xyouts, 0.6, 5.1, string('Hg!uP!n anthro:', string(old_em_HgP_anthro/1d3/ofiles,format='(I7.0)')), color=1
+   xyouts, 0.6, 4.8, string('Hg!u0!n geo:', string(old_em_Hg0_geo/1d3/ofiles,format='(I7.0)')), color=1
+   xyouts, 0.6, 4.5, string('Hg!u0!n soil:', string(old_em_Hg0_soil/1d3/ofiles,format='(I7.0)')), color=1
+   xyouts, 0.6, 4.2, string('Hg!u0!n bb:', string(old_em_Hg0_BB/1d3/ofiles,format='(I7.0)')), color=1
+   xyouts, 0.6, 3.9, string('Hg!u0!n land re:', string(old_em_Hg0_land/1d3/ofiles,format='(I7.0)')), color=1
+   xyouts, 0.6, 3.6, string('Hg!u0!n snow:', string(old_em_Hg0_snow/1d3/ofiles,format='(I7.0)')), color=1
+   xyouts, 0.6, 3.3, string('Hg!u0!n oc evasion:', string(old_em_Hg0_oc_up/1d3/ofiles,format='(I7.0)')), color=1
+   xyouts, 0.6, 3.0, string('TOTAL EMISSIONS:', string(old_em_total/1d3/ofiles,format='(I7.0)')), color=1
+   xyouts, 4.2, 9.0, 'DEPOSITION', color=1
+   xyouts, 4.2, 8.7, string('Hg!u0!n dd:', string(old_Hg0DryD/1d3/ofiles,format='(I7.0)')), color=1
+   xyouts, 4.2, 8.4, string('Hg!u2!n dd:', string(old_Hg2DryD/1d3/ofiles,format='(I7.0)')), color=1
+   xyouts, 4.2, 8.1, string('Hg!uP!n dd:', string(old_HgPDryD/1d3/ofiles,format='(I7.0)')), color=1
+   xyouts, 4.2, 7.8, string('Hg!u2!n wd:', string(old_Hg2Wet/1d3/ofiles,format='(I7.0)')), color=1
+   xyouts, 4.2, 7.5, string('Hg!uP!n wd:', string(old_HgPWet/1d3/ofiles,format='(I7.0)')), color=1
+   xyouts, 4.2, 7.2, string('Hg!u0!n oc uptake:', string(old_em_Hg0_oc_dn/1d3/ofiles,format='(I7.0)')), color=1
+   xyouts, 4.2, 6.9, string('Hg!u2!n seasalt:', string(old_pl_Hg_seasalt/1d3/ofiles,format='(I7.0)')), color=1
+   xyouts, 4.2, 6.6, string('TOTAL DEPOSITION:', string(old_dep_total/1d3/ofiles,format='(I7.0)')), color=1
+   xyouts, 4.2, 6.0, 'REDOX', color=1
    if (chemistry eq 'Br') then begin
-   xyouts, 4.0, 5.7, string('Gross Ox by Br:', string(old_pl_Hg_Br/1d3/ofiles,format='(I10.0)')),color=1
+   xyouts, 4.2, 5.7, string('Gross Ox by Br:', string(old_pl_Hg_Br/1d3/ofiles,format='(I7.0)')),color=1
    endif else begin
-   xyouts, 4.0, 5.7, string('Gross Ox by OH+O!d3!n:', string((old_pl_Hg_OH+old_pl_Hg_O3)/1d3/ofiles,format='(I10.0)')),color=1
+   xyouts, 4.2, 5.7, string('Gross Ox by OH+O!d3!n:', string((old_pl_Hg_OH+old_pl_Hg_O3)/1d3/ofiles,format='(I7.0)')),color=1
    endelse
-   xyouts, 4.0, 5.4, string('Gross Reduction:', string(old_pl_Hg_reduction/1d3/ofiles,format='(I10.0)')),color=1
-   xyouts, 4.0, 5.1, string('Net Oxidation', string((old_pl_Hg_Br-old_pl_Hg_reduction)/1d3/ofiles,format='(I10.0)')),color=1
+   xyouts, 4.2, 5.4, string('Gross Reduction:', string(old_pl_Hg_reduction/1d3/ofiles,format='(I7.0)')),color=1
+   xyouts, 4.2, 5.1, string('Net Oxidation', string((old_pl_Hg_Br-old_pl_Hg_reduction)/1d3/ofiles,format='(I7.0)')),color=1
 
 
-   xyouts, 3.0, 9.5, 'NEW MODEL VERSION', color=2
-   xyouts, 2.1, 8.7, string(string(new_Hg0masstrop/1d3/nfiles,format='(I10.0)'), '  Mg'), color=2
-   xyouts, 2.1, 8.4, string(string(new_Hg2masstrop/1d3/nfiles,format='(I10.0)'), '  Mg'), color=2
-   xyouts, 2.1, 8.1, string(string(new_HgPmasstrop/1d3/nfiles,format='(I10.0)'), '  Mg'), color=2
-   xyouts, 2.1, 7.2, string(string(new_Hg0ocmass/1d3/nfiles,format='(I10.0)'), '  Mg'), color=2
-   xyouts, 2.1, 6.9, string(string(new_Hg2ocmass/1d3/nfiles,format='(I10.0)'), '  Mg'), color=2
-   xyouts, 2.1, 6.6, string(string(new_HgCocmass/1d3/nfiles,format='(I10.0)'), '  Mg'), color=2
-   xyouts, 2.1, 5.7, string(string(new_em_Hg0_anthro/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
-   xyouts, 2.1, 5.4, string(string(new_em_Hg2_anthro/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
-   xyouts, 2.1, 5.1, string(string(new_em_HgP_anthro/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
-   xyouts, 2.1, 4.8, string(string(new_em_Hg0_geo/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
-   xyouts, 2.1, 4.5, string(string(new_em_Hg0_soil/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
-   xyouts, 2.1, 4.2, string(string(new_em_Hg0_BB/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
-   xyouts, 2.1, 3.9, string(string(new_em_Hg0_land/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
-   xyouts, 2.1, 3.6, string(string(new_em_Hg0_snow/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
-   xyouts, 2.7, 3.3, string(string(new_em_Hg0_oc_up/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
-   xyouts, 3.0, 3.0, string(string(new_em_total/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
-   xyouts, 5.5, 8.7, string(string(new_Hg0DryD/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
-   xyouts, 5.5, 8.4, string(string(new_Hg2DryD/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
-   xyouts, 5.5, 8.1, string(string(new_HgPDryD/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
-   xyouts, 5.5, 7.8, string(string(new_Hg2Wet/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
-   xyouts, 5.5, 7.5, string(string(new_HgPWet/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
-   xyouts, 6.0, 7.2, string(string(new_em_Hg0_oc_dn/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
-   xyouts, 6.0, 6.9, string(string(new_pl_Hg_seasalt/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
-   xyouts, 6.6, 6.6, string(string(new_dep_total/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
+   xyouts, 0.4+3.0, 9.5, 'NEW MODEL VERSION', color=2
+   xyouts, 0.4+2.1, 8.7, string(string(new_Hg0masstrop/1d3/nfiles,format='(I10.0)'), '  Mg'), color=2
+   xyouts, 0.4+2.1, 8.4, string(string(new_Hg2masstrop/1d3/nfiles,format='(I10.0)'), '  Mg'), color=2
+   xyouts, 0.4+2.1, 8.1, string(string(new_HgPmasstrop/1d3/nfiles,format='(I10.0)'), '  Mg'), color=2
+   xyouts, 0.4+2.1, 7.2, string(string(new_Hg0ocmass/1d3/nfiles,format='(I10.0)'), '  Mg'), color=2
+   xyouts, 0.4+2.1, 6.9, string(string(new_Hg2ocmass/1d3/nfiles,format='(I10.0)'), '  Mg'), color=2
+   xyouts, 0.4+2.1, 6.6, string(string(new_HgCocmass/1d3/nfiles,format='(I10.0)'), '  Mg'), color=2
+   xyouts, 0.4+2.1, 5.7, string(string(new_em_Hg0_anthro/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
+   xyouts, 0.4+2.1, 5.4, string(string(new_em_Hg2_anthro/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
+   xyouts, 0.4+2.1, 5.1, string(string(new_em_HgP_anthro/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
+   xyouts, 0.4+2.1, 4.8, string(string(new_em_Hg0_geo/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
+   xyouts, 0.4+2.1, 4.5, string(string(new_em_Hg0_soil/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
+   xyouts, 0.4+2.1, 4.2, string(string(new_em_Hg0_BB/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
+   xyouts, 0.4+2.1, 3.9, string(string(new_em_Hg0_land/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
+   xyouts, 0.4+2.1, 3.6, string(string(new_em_Hg0_snow/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
+   xyouts, 0.4+2.7, 3.3, string(string(new_em_Hg0_oc_up/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
+   xyouts, 0.4+3.0, 3.0, string(string(new_em_total/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
+   xyouts, 0.4+5.5, 8.7, string(string(new_Hg0DryD/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
+   xyouts, 0.4+5.5, 8.4, string(string(new_Hg2DryD/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
+   xyouts, 0.4+5.5, 8.1, string(string(new_HgPDryD/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
+   xyouts, 0.4+5.5, 7.8, string(string(new_Hg2Wet/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
+   xyouts, 0.4+5.5, 7.5, string(string(new_HgPWet/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
+   xyouts, 0.4+6.0, 7.2, string(string(new_em_Hg0_oc_dn/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
+   xyouts, 0.4+6.0, 6.9, string(string(new_pl_Hg_seasalt/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
+   xyouts, 0.4+6.8, 6.6, string(string(new_dep_total/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
    if (chemistry eq 'Br') then begin
-   xyouts, 6.5, 5.7, string(string(new_pl_Hg_Br/1d3/nfiles,format='(I10.0)'), '  Mg/y'),color=2
+   xyouts, 0.4+6.5, 5.7, string(string(new_pl_Hg_Br/1d3/nfiles,format='(I10.0)'), '  Mg/y'),color=2
    endif else begin
-   xyouts, 6.5, 5.7, string(string((new_pl_Hg_OH+new_pl_Hg_O3)/1d3/nfiles,format='(I10.0)'), '  Mg/y'),color=2
+   xyouts, 0.4+6.5, 5.7, string(string((new_pl_Hg_OH+new_pl_Hg_O3)/1d3/nfiles,format='(I10.0)'), '  Mg/y'),color=2
    endelse
-   xyouts, 6.5, 5.4, string(string(new_pl_Hg_reduction/1d3/nfiles,format='(I10.0)'), '  Mg/y'),color=2
-   xyouts, 6.5, 5.1, string(string((new_pl_Hg_Br-new_pl_Hg_reduction)/1d3/nfiles,format='(I10.0)'), '  Mg/y'),color=2
+   xyouts, 0.4+6.5, 5.4, string(string(new_pl_Hg_reduction/1d3/nfiles,format='(I10.0)'), '  Mg/y'),color=2
+   xyouts, 0.4+6.5, 5.1, string(string((new_pl_Hg_Br-new_pl_Hg_reduction)/1d3/nfiles,format='(I10.0)'), '  Mg/y'),color=2
 
 
    multipanel, /off
 
 
-   ps_setup, /close, /landscape
+   ps_setup, /close, /noview;/landscape
 
 
 end

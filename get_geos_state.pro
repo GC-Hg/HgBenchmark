@@ -21,6 +21,7 @@ function get_geos_state, Variable, ModelInfo, Month, $
       'GEOS5_47L': year = 2007L
       'MERRA': year = 2008L
       'MERRA_47L': year = 2008L
+      'GEOSFP_47L': year = 2013L
       else: message, 'No saved atmospheric data for GEOS type: '+ModelInfo.name
    endcase
 

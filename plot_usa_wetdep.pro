@@ -2,6 +2,7 @@ pro plot_usa_wetdep, FileName=FileName, $
                      psFileName=psFileName, $
                      PS=PS, $
                      MDNyear=MDNyear_in, $
+                     nearest_year=nearest_year,$
                      Divisions=Divisions, wetdep ;eds 11/16/10 return wetdep
    
 ; Plot annual total wet deposition over the United States
@@ -10,6 +11,8 @@ pro plot_usa_wetdep, FileName=FileName, $
    ;------------------------------------------------;
    ; eds 5/11/11 modified to include reference file ;
    ; for use in mercury model benchmarking          ;
+   ; jaf 5/17/11 added nearest_year keyword to plot ;
+   ; nearest year of data if no data available      ;
    ;------------------------------------------------;
 
    ;=======================================
@@ -102,6 +105,11 @@ pro plot_usa_wetdep, FileName=FileName, $
    ; Default- Don't plot unless we have data
    PlotMDN = 0L
 
+   if (Keyword_set(nearest_year) and (year lt min(MDNyear))) then $
+      MDNyear_in = min(MDNyear) else $
+   if (Keyword_set(nearest_year) and (year gt max(MDNyear))) then $
+      MDNyear_in = max(MDNyear)
+
    if Keyword_set( MDNyear_in ) then $
       thisYear = MDNyear_in $
    else $
@@ -174,7 +182,7 @@ pro plot_usa_wetdep, FileName=FileName, $
       ; Make title
       title = 'Hg Wet Deposition, GEOS-Chem ' + $
               strjoin( strtrim( string(year), 2), ', ')+$
-              '!C MDN '+strjoin(strtrim(string(pYear), 2), ', ') 
+              '!C MDN '+strjoin(strtrim(string(pYear,'(i)'), 2), ', ') 
 
        tvmap_region, region='conus', $
                      wetdep, xmid, ymid, $

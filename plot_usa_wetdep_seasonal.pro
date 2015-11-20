@@ -2,6 +2,7 @@ pro plot_usa_wetdep_seasonal, FileName   = FileName  , $
                               psFileName = psFileName, $
                               PS         = PS        , $
                               MDNyear    = MDNyear_in, $
+                              nearest_year=nearest_year,$
                               lonrange   = lonrange  , $
                               Divisions  = Divisions , $
                               Reference  = Reference
@@ -48,6 +49,8 @@ pro plot_usa_wetdep_seasonal, FileName   = FileName  , $
 ; 05 Jun 2011 - H Amos - replace CompareFile keyword with Reference,
 ;                        to be consistent with benchmark scripts
 ;         
+   ; jaf 5/17/11 added nearest_year keyword to plot ;
+   ; nearest year of data if no data available      ;
 ;====================================================================
 
 
@@ -135,7 +138,7 @@ pro plot_usa_wetdep_seasonal, FileName   = FileName  , $
    WetDep = get_total_wetdep( FileName = FileName      , $
                               species  = ['Hg2', 'HgP'], $
                               GridInfo = GridInfo      , $
-                              Year     = Year          , $
+                              Year     = NewYear       , $
                               /ByMonth                    )
    
    ; Convert ug/m2/d -> ng/m2/d
@@ -164,7 +167,7 @@ pro plot_usa_wetdep_seasonal, FileName   = FileName  , $
       WetDep2 = get_total_wetdep( FileName = Reference     , $
                                   species  = ['Hg2', 'HgP'], $
                                   GridInfo = GridInfo      , $
-                                  Year     = Year          , $
+                                  Year     = RefYear       , $
                                   /ByMonth                    )
    
       ; Convert ug/m2/d -> ng/m2/d
@@ -190,7 +193,12 @@ pro plot_usa_wetdep_seasonal, FileName   = FileName  , $
    ;=======================================
 
    ; Assume that FileName and Reference are the same model years
-   
+   Year = NewYear 
+   if (Keyword_set(nearest_year) and (year lt min(MDN.year))) then $
+      MDNyear_in = min(MDN.year) else $
+   if (Keyword_set(nearest_year) and (year gt max(MDN.year))) then $
+      MDNyear_in = max(MDN.year)
+
    if keyword_set( MDNyear_in ) then $
       year = MDNyear_in
 
@@ -318,11 +326,14 @@ pro plot_usa_wetdep_seasonal, FileName   = FileName  , $
 
    ; Make legend
    if ( ~ Keyword_set( Reference ) ) then begin
-   legend, label=['MDN', 'Model' ], $
+   legend, label=['MDN '+strtrim(string(MDNyear_in,'(i)'),2),$
+                  'Model '+strtrim(string(NewYear),2)], $
            line=[0, 0], lcolor=[1, 2], $
            halign=.8, valign=.8, charsize=.8, /color, /frame
    endif else begin
-   legend, label=['MDN', 'New Model', 'Old Model'], $
+   legend, label=['MDN '+strtrim(string(MDNyear_in,'(i)'),2),$
+                  'New Model '+strtrim(string(NewYear),2), $
+                  'Old Model '+strtrim(string(RefYear),2)], $
 ;   legend, label=['MDN', 'MERRA base', 'MG wetscav'], $
            line=[0, 0, 0], lcolor=[1, 2, 4], $
            halign=.8, valign=.8, charsize=.8, /color, /frame 

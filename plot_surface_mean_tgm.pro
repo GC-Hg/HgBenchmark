@@ -232,8 +232,8 @@ pro plot_surface_mean_TGM, FileName=FileName, $
                   center=[LANDlat[S], LANDlon[S] ]
 
        ; Convert fortran -> IDL index
-       I = I + 1L
-       J = J + 1L
+       I = I - 1L
+       J = J - 1L
 
        GRIDindex[S] = I * 10000L + J       
 

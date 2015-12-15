@@ -326,12 +326,12 @@ pro plot_usa_wetdep_seasonal, FileName   = FileName  , $
 
    ; Make legend
    if ( ~ Keyword_set( Reference ) ) then begin
-   legend, label=['MDN '+strtrim(string(MDNyear_in,'(i)'),2),$
+   legend, label=['MDN '+strtrim(string(Year[0],'(i)'),2),$
                   'Model '+strtrim(string(NewYear),2)], $
            line=[0, 0], lcolor=[1, 2], $
            halign=.8, valign=.8, charsize=.8, /color, /frame
    endif else begin
-   legend, label=['MDN '+strtrim(string(MDNyear_in,'(i)'),2),$
+   legend, label=['MDN '+strtrim(string(Year[0],'(i)'),2),$
                   'New Model '+strtrim(string(NewYear),2), $
                   'Old Model '+strtrim(string(RefYear),2)], $
 ;   legend, label=['MDN', 'MERRA base', 'MG wetscav'], $

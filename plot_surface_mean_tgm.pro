@@ -16,7 +16,7 @@
 ; INPUTS:
 ;
 ; KEYWORD PARAMETERS:
-;        FILENAME : name of BPCH file 
+;        FILENAME : name of BPCH file
 ;        PSFILENAME : post-script file name. will plot to screen if
 ;        not used.
 ;        PS : set TRUE if you want to use the default post-script
@@ -24,7 +24,7 @@
 ;        DATARANGE : 2-element array giving limits of plotting range,
 ;        in pptv
 ;        LOG : will plot log concentration if used
-;        DIVISIONS : number of divisions in the colorbar 
+;        DIVISIONS : number of divisions in the colorbar
 ;        PAGETITLE : string label for top of page
 ;        REGION    : Plot region, passed to TVMAP_REGION
 ;        _EXTRA    : passed to CTM_GET_DATABLOCK and TVMAP
@@ -72,39 +72,39 @@ pro plot_surface_mean_TGM, FileName=FileName, $
    ;=======================================
 
    DataDir = !BENCHMARK+'/data/' ;eds
-   
+
    Species = 'TGM'
    DiagN = 'IJ-AVG-$'
 
    if ( not Keyword_set( FileName ) ) then $
       FileName = 'ctm.bpch'
- 
+
    ; Plot whole globe by default
    Global = 0L
    if ( not Keyword_set( lonRange ) ) then begin
       lonRange = [-180, 180]
       Global = 1L
    endif
- 
+
    if Keyword_set( psFileName ) then $
       PS = 1L $
    else $
       PS = 0L
- 
+
    if ( not Keyword_set( psFileName ) ) then begin
       if ( Global ) then begin
-         psFileName = 'surface.'+species+'.ps' 
+         psFileName = 'surface.'+species+'.ps'
       endif else begin
          sLonCenter = strtrim( string( fix( mean( lonRange ) ) ), 2)
          psFileName = 'surface.' + sLonCenter + $
                       '.'+species+'.ps'
       endelse
    endif
- 
+
    LOG = Keyword_set( Log )
- 
+
    if ( not Keyword_set( Divisions ) ) then $
-      Divisions = 5 
+      Divisions = 5
 
    if ( not Keyword_set( Region )) then $
       Region = ''
@@ -142,63 +142,63 @@ pro plot_surface_mean_TGM, FileName=FileName, $
    transread_delim, lun, filename=TGMFile, skiplines=2, /debug, $
      LANDID, LANDlat, LANDlon, LANDalt, LANDTGM, LANDHg0, delim=',', $
      format='(A0,5F0.0)'
- 
+
    TGM = LANDTGM
    ii = where( LANDTGM eq -9999 )
    LANDtgm[ii] = LANDHg0[ii]
    TGM[ii] = LANDHg0[ii]
    TGMlat = LANDlat
    TGMlon = LANDlon
- 
+
    ;---------------
    ; Cruise Data
 
-   CruiseFile = DataDir + 'TGMCruise.csv' ;eds 5/10/11
+;   CruiseFile = DataDir + 'TGMCruise.csv' ;eds 5/10/11
+;
+;   ID =''
+;   lat=0.
+;   lon=0.
+;   d3=0.
 
-   ID =''
-   lat=0.
-   lon=0.
-   d3=0.
+;   transread_delim, lun, filename=CruiseFile, skiplines=0, /debug, $
+;     ID, lat, lon, D3, delim=',', $
+;     format='(A0,3F0.0)'
 
-   transread_delim, lun, filename=CruiseFile, skiplines=0, /debug, $
-     ID, lat, lon, D3, delim=',', $
-     format='(A0,3F0.0)'
-   
-   TGMlat = [TGMlat, lat]
-   TGMlon = [TGMlon, lon]
-   TGM    = [TGM, d3]
+;   TGMlat = [TGMlat, lat]
+;   TGMlon = [TGMlon, lon]
+;   TGM    = [TGM, d3]
 
-   CRUISEtgm=d3
-   CRUISElat=lat
-   CRUISElon=lon
-   
+;   CRUISEtgm=d3
+;   CRUISElat=lat
+;   CRUISElon=lon
+
    ;---------------
    ; Galathea Cruise
 
-   TGMfile = DataDir + 'Galathea3_cruise.csv' ;eds 5/10/11
+;   TGMfile = DataDir + 'Galathea3_cruise.csv' ;eds 5/10/11
 
-   lat = 0d0
-   lon = 0d0
-   D4 = 0d0
-   ID = 0L
+;   lat = 0d0
+;   lon = 0d0
+;   D4 = 0d0
+;   ID = 0L
 
-   transread, lun, filename=TGMfile, skiplines=1, /debug, $
-     ID, lat, lon, D4, $
-     format='(I0,X,F0.0,X,F0.0,X,F0.0)'
+;   transread, lun, filename=TGMfile, skiplines=1, /debug, $
+;     ID, lat, lon, D4, $
+;     format='(I0,X,F0.0,X,F0.0,X,F0.0)'
 
-   TGMlat = [TGMlat, lat]
-   TGMlon = [TGMlon, lon]
-   TGM    = [TGM,    D4]
-   
-   CRUISEtgm = [CRUISEtgm, D4]
-   CRUISElat = [CRUISElat, lat]
-   CRUISElon = [CRUISElon, lon]
-   
-   if keyword_set(ppq) then begin ;eds
-      TGM = TGM * ngm3_ppqv
-      LANDtgm = LANDtgm * ngm3_ppqv
-      CRUISEtgm = CRUISEtgm * ngm3_ppqv
-  endif
+;   TGMlat = [TGMlat, lat]
+;   TGMlon = [TGMlon, lon]
+;   TGM    = [TGM,    D4]
+
+;   CRUISEtgm = [CRUISEtgm, D4]
+;   CRUISElat = [CRUISElat, lat]
+;   CRUISElon = [CRUISElon, lon]
+
+;   if keyword_set(ppq) then begin ;eds
+;      TGM = TGM * ngm3_ppqv
+;      LANDtgm = LANDtgm * ngm3_ppqv
+;      CRUISEtgm = CRUISEtgm * ngm3_ppqv
+;  endif
 
    ;=======================================
    ; Read BPCH data
@@ -216,7 +216,7 @@ pro plot_surface_mean_TGM, FileName=FileName, $
       ; convert pptv -> ng/m3
       Data_mean = Data_mean * pptv_ngm3 ;eds 5/10/11
    endelse
-   
+
    ;=======================================
    ; Test Correlation, for terrestrial sites
    ;=======================================
@@ -235,7 +235,7 @@ pro plot_surface_mean_TGM, FileName=FileName, $
        I = I - 1L
        J = J - 1L
 
-       GRIDindex[S] = I * 10000L + J       
+       GRIDindex[S] = I * 10000L + J
 
    endfor
 
@@ -273,7 +273,7 @@ pro plot_surface_mean_TGM, FileName=FileName, $
    ;=======================================
    ; Test Correlation, for Europe and N. America
    ;=======================================
-   
+
    ii = where( (TGMlat ge 25) and (TGMlat le 70) and $
                (TGMlon ge -130) and (TGMlon le 90) )
 
@@ -307,10 +307,10 @@ pro plot_surface_mean_TGM, FileName=FileName, $
    ;=======================================
    ; Plotting
    ;=======================================
- 
+
    If Keyword_Set( PS ) then $
       ps_setup, /open, file=psFileName, xsize=10, ysize=7, /landscape
-   
+
    multipanel, col=ncols, row=nrows, omargin=[0.05, 0.05, 0.1, 0.1]
 
    xmid = GridInfo.xmid
@@ -327,19 +327,31 @@ pro plot_surface_mean_TGM, FileName=FileName, $
       clev = [maken(0.75, 1.75, 11), maken(2.0, 3.5, 6)] ;eds 5/10/11
    endelse
 
-   tvmap_region, Region=Region, $
-          data_mean, xmid, ymid, $
-          CRUISETGM, CRUISElon, CRUISElat, t_symbol=1, $
-          c_levels=clev, $
-          title=PageTitle, /ystyle, $
-          margin=[0.015,  0.01, 0.015, 0.02],  $
-          csfac=1.15, /continents, Log=Log, $
-          /nogx, /nogy, $
-          /noadvance, /robinson, /horizon, $
-          /cbar, cbposition=[1.02, 0.2, 1.04, 0.8], /vertical, /triangle, $
-          botoutofrange=!myct.bottom,unit=unit, $
-          _Extra=_Extra
+;   tvmap_region, Region=Region, $
+;          data_mean, xmid, ymid, $
+;          CRUISETGM, CRUISElon, CRUISElat, t_symbol=1, $
+;          c_levels=clev, $
+;          title=PageTitle, /ystyle, $
+;          margin=[0.015,  0.01, 0.015, 0.02],  $
+;          csfac=1.15, /continents, Log=Log, $
+;          /nogx, /nogy, $
+;          /noadvance, /robinson, /horizon, $
+;          /cbar, cbposition=[1.02, 0.2, 1.04, 0.8], /vertical, /triangle, $
+;          botoutofrange=!myct.bottom,unit=unit, $
+;          _Extra=_Extra
 
+   tvmap_region, Region=Region, $
+         data_mean, xmid, ymid, $
+         t_symbol=1, $
+         c_levels=clev, $
+         title=PageTitle, /ystyle, $
+         margin=[0.015,  0.01, 0.015, 0.02],  $
+         csfac=1.15, /continents, Log=Log, $
+         /nogx, /nogy, $
+         /noadvance, /robinson, /horizon, $
+         /cbar, cbposition=[1.02, 0.2, 1.04, 0.8], /vertical, /triangle, $
+         botoutofrange=!myct.bottom,unit=unit, $
+         _Extra=_Extra
 
    scatterplot_datacolor, LANDlon, LANDlat, LANDtgm, $
                           sym=4, /outline, /overplot, /nocb, $
@@ -365,7 +377,7 @@ pro plot_surface_mean_TGM, FileName=FileName, $
    xyouts, 0.55, 0.10, strmod, /color, /normal, align=0
 
    multipanel, /off
- 
+
    If Keyword_Set( PS ) then $
       ps_setup, /close
 

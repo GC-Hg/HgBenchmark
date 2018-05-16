@@ -37,7 +37,7 @@ pro plot_europe_wetdep, FileName=FileName, $
 
    ; File with Annual mean EMEP data
 ;   EMEPfile = DataDir + 'emep_ann_hg_dep_2000s.dat' ;median data
-   EMEPfile = DataDir + 'emep_ann_hg_dep_2013-14.dat' ;eds 5/11/11
+   EMEPfile = DataDir + 'emep_ann_hg_dep_2013-15.dat' ;ha 5/15/18
 
    ; Range of wet deposition to plot, ug/m2/y
    Range = [0, 20]
@@ -53,18 +53,15 @@ pro plot_europe_wetdep, FileName=FileName, $
    EMEPlat = 0.
    EMEPlon = 0.
    EMEPelev = 0.
-   d2013 = 0.
-   d2014 = 0.
-   p2013 = 0.
-   p2014 = 0.
+   d2015 = 0.
 
    transread_delim, lun, filename=EMEPfile, skiplines=3, delim=',', /debug, $
               EMEPsite, EMEPlat, EMEPlon, EMEPelev, $
-                    d2013, d2014, p2013, p2014, $
+                    d2015, $
               format='(A,7F)'
 
-   EMEP = [[d2013], [d2014]]
-   EMEPyear = [2013, 2014]
+   EMEP = d2015
+   EMEPyear = 2015
 
    ; Convert ng/m2/y -> ug/m2/y
    EMEP = EMEP / 1e3
@@ -89,10 +86,10 @@ pro plot_europe_wetdep, FileName=FileName, $
 ;      EMEPyear_in = 2013 else $
 ;   if (Keyword_set(nearest_year) and (year gt 2014)) then $
 ;      EMEPyear_in = 2014
-   if (Keyword_set(nearest_year) and (max(year) lt 2013)) then $
-      EMEPyear_in = 2013 else $
-   if (Keyword_set(nearest_year) and (max(year) gt 2014)) then $
-      EMEPyear_in = 2014 
+   if (Keyword_set(nearest_year) and (max(year) lt 2015)) then $
+      EMEPyear_in = 2015 else $
+   if (Keyword_set(nearest_year) and (max(year) gt 2015)) then $
+      EMEPyear_in = 2015
 
 
    if Keyword_set( EMEPyear_in ) then $

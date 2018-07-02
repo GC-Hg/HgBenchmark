@@ -84,7 +84,7 @@ Warnings:                    1
     --> WHET              :       true
     --> ZHAOZHANG         :       false
     --> CHAKRABORTY       :       false
-    --> EMISS_CONT        :       true
+    --> EMISS_CONT        :       true 
     --> ARTISANAL         :       false
     --> NATURAL           :       true
     --> SOILDIST          :       true
@@ -101,7 +101,6 @@ Warnings:                    1
     --> LRED_INPLUME      :       false
 # ----------------------------------------------------------------------------
 111     GFED              : on    Hg0
-    --> GFED3             :       false
     --> GFED4             :       true
     --> GFED_daily        :       false
     --> GFED_3hourly      :       false
@@ -204,15 +203,15 @@ Warnings:                    1
 
 )))CHAKRABORTY
 
-
+#==============================================================================
 # WHET emissions inventory
+#==============================================================================
+
 (((WHET
 0 WHET_HG0 $ROOT/MERCURY/v2018-04/WHET_Hg0.geos.1x1.2010_final.nc Hg0 2010/1/1/0 C xy kg/m2/s Hg0 - 1 1
 0 WHET_HG2 $ROOT/MERCURY/v2018-04/WHET_Hg2.geos.1x1.2010_final.nc Hg2 2010/1/1/0 C xy kg/m2/s Hg2 - 1 1
 0 WHET_HGP $ROOT/MERCURY/v2018-04/WHET_HgP.geos.1x1.2010_final.nc HgP 2010/1/1/0 C xy kg/m2/s Hg2 - 1 1
 )))WHET
-
-
 
 #==============================================================================
 # --- Emissions Controls for Coal Fired Power Plants  ---
@@ -294,24 +293,6 @@ Warnings:                    1
 # --- GFED biomass burning emissions (Extension 111) 
 # NOTE: These are the base emissions in kgDM/m2/s.
 #==============================================================================
-111 GFED_HUMTROP    $ROOT/GFED3/v2014-10/GFED3_humtropmap.nc              humtrop           2000/1/1/0             C xy 1         * - 1 1
-
-(((GFED3   
-111 GFED_WDL        $ROOT/GFED3/v2014-10/GFED3_gen.1x1.$YYYY.nc           GFED3_BB__WDL_DM  1997-2011/1-12/01/0    C xy kgDM/m2/s * - 1 1
-111 GFED_AGW        $ROOT/GFED3/v2014-10/GFED3_gen.1x1.$YYYY.nc           GFED3_BB__AGW_DM  1997-2011/1-12/01/0    C xy kgDM/m2/s * - 1 1
-111 GFED_DEF        $ROOT/GFED3/v2014-10/GFED3_gen.1x1.$YYYY.nc           GFED3_BB__DEF_DM  1997-2011/1-12/01/0    C xy kgDM/m2/s * - 1 1
-111 GFED_FOR        $ROOT/GFED3/v2014-10/GFED3_gen.1x1.$YYYY.nc           GFED3_BB__FOR_DM  1997-2011/1-12/01/0    C xy kgDM/m2/s * - 1 1
-111 GFED_PET        $ROOT/GFED3/v2014-10/GFED3_gen.1x1.$YYYY.nc           GFED3_BB__PET_DM  1997-2011/1-12/01/0    C xy kgDM/m2/s * - 1 1
-111 GFED_SAV        $ROOT/GFED3/v2014-10/GFED3_gen.1x1.$YYYY.nc           GFED3_BB__SAV_DM  1997-2011/1-12/01/0    C xy kgDM/m2/s * - 1 1
-
-(((GFED_daily
-111 GFED_FRAC_DAY   $ROOT/GFED3/v2014-10/GFED3_dailyfrac_gen.1x1.$YYYY.nc GFED3_BB__DAYFRAC 2002-2011/1-12/1-31/0  C xy 1         * - 1 1
-)))GFED_daily
-
-(((GFED_3hourly
-111 GFED_FRAC_3HOUR $ROOT/GFED3/v2014-10/GFED3_3hrfrac_gen.1x1.$YYYY.nc   GFED3_BB__HRFRAC  2002-2011/1-12/01/0-23 C xy 1         * - 1 1
-)))GFED_3hourly
-)))GFED3  
 
 (((GFED4
 111 GFED_TEMP       $ROOT/GFED4/v2015-10/$YYYY/GFED4_gen.025x025.$YYYY$MM.nc  DM_TEMP       1997-2014/1-12/01/0    C xy kgDM/m2/s * - 1 1
@@ -331,7 +312,7 @@ Warnings:                    1
 )))GFED4
 
 #==============================================================================
-# --- FINN biomass burning emissions (Extension 114) 
+# --- FINN v1.5 biomass burning emissions (Extension 114) 
 #==============================================================================
 (((.not.FINN_daily
 114 FINN_VEGTYP1       $ROOT/FINN/v2015-02/FINN_monthly_$YYYY_0.25x0.25.compressed.nc fire_vegtype1 $YYYY/1-12/1/0 C xy kg/m2/s * - 1 1
@@ -369,25 +350,25 @@ Warnings:                    1
 #==============================================================================
 # --- Oxidant fields (O3, OH) ---
 #==============================================================================
-* GLOBAL_O3  $ROOT/O3/v2014-09/MERGE.O3.geos5.72L.2x25.nc                 O3 1985/1-12/1/0 C xyz v/v   * - 1 1
-* GLOBAL_OH_trop  $ROOT/MERCURY/v2018-04/Johan.OH.kgm3.2007.nc CHEM_L_S__OH 2007/1-12/1/0 C xyz 1 * - 1 1
-* GLOBAL_OH_strat  $ROOT/OH/v2014-09/v7-02-03.GMI/OH_3Dglobal.geos5.72L.2x25.nc OH 1985/1-12/1/0 C xyz 1 * - 1 1
-* GLOBAL_HO2_strat $ROOT/GMI/v2015-02/gmi.clim.HO2.geos5.2x25.nc species 1985/1-12/1/0 C xyz 1 * - 1 1
-* GLOBAL_HO2_trop $ROOT/MERCURY/v2018-04/Johan.HO2.2007.nc CHEM_L_S__HO2 2007/1-12/1/0 C xyz 1 * - 1 1
-* GLOBAL_Cl  $ROOT/MERCURY/v2018-04/halogens.Johan.Mar16.2007.nc IJ_24H_S__Cl 2007/1-12/1/0 C xyz 1 * - 1 1
-* GLOBAL_HOCl  $ROOT/MERCURY/v2018-04/halogens.Johan.Mar16.2007.nc IJ_24H_S__HOCl 2007/1-12/1/0 C xyz 1 * - 1 1
-* GLOBAL_ClO  $ROOT/MERCURY/v2018-04/halogens.Johan.Mar16.2007.nc IJ_24H_S__ClO 2007/1-12/1/0 C xyz 1 * - 1 1
-* GLOBAL_NO2  $ROOT/MERCURY/v2018-04/halogens.Johan.Mar16.2007.nc IJ_24H_S__NO2 2007/1-12/1/0 C xyz 1 * - 1 1
-* GLOBAL_NO  $ROOT/MERCURY/v2018-04/halogens.Johan.Mar16.2007.nc IJ_24H_S__NO 2007/1-12/1/0 C xyz 1 * - 1 1
-* GLOBAL_OA  $ROOT/MERCURY/v2018-04/OA_3Dglobal.geosfp.4x5.2013.nc IJ_SOA_S__ 2013/1-12/1/0 C xyz 1 * - 1 1
-* GLOBAL_OCEAN $ROOT/MERCURY/v2018-04/ocean_fixed.nc ocean_conc 1985/1-12/1/0 C xyz 1 * - 1 1
+* GLOBAL_O3        $ROOT/O3/v2014-09/MERGE.O3.geos5.72L.2x25.nc                 O3             1985/1-12/1/0 C xyz v/v * - 1 1
+* GLOBAL_OH_trop   $ROOT/MERCURY/v2018-04/Johan.OH.kgm3.2007.nc                 CHEM_L_S__OH   2007/1-12/1/0 C xyz 1   * - 1 1
+* GLOBAL_OH_strat  $ROOT/OH/v2014-09/v7-02-03.GMI/OH_3Dglobal.geos5.72L.2x25.nc OH             1985/1-12/1/0 C xyz 1   * - 1 1
+* GLOBAL_HO2_strat $ROOT/GMI/v2015-02/gmi.clim.HO2.geos5.2x25.nc                species        1985/1-12/1/0 C xyz 1   * - 1 1
+* GLOBAL_HO2_trop  $ROOT/MERCURY/v2018-04/Johan.HO2.2007.nc                     CHEM_L_S__HO2  2007/1-12/1/0 C xyz 1   * - 1 1
+* GLOBAL_Cl        $ROOT/MERCURY/v2018-04/halogens.Johan.Mar16.2007.nc          IJ_24H_S__Cl   2007/1-12/1/0 C xyz 1   * - 1 1
+* GLOBAL_HOCl      $ROOT/MERCURY/v2018-04/halogens.Johan.Mar16.2007.nc          IJ_24H_S__HOCl 2007/1-12/1/0 C xyz 1   * - 1 1
+* GLOBAL_ClO       $ROOT/MERCURY/v2018-04/halogens.Johan.Mar16.2007.nc          IJ_24H_S__ClO  2007/1-12/1/0 C xyz 1   * - 1 1
+* GLOBAL_NO2       $ROOT/MERCURY/v2018-04/halogens.Johan.Mar16.2007.nc          IJ_24H_S__NO2  2007/1-12/1/0 C xyz 1   * - 1 1
+* GLOBAL_NO        $ROOT/MERCURY/v2018-04/halogens.Johan.Mar16.2007.nc          IJ_24H_S__NO   2007/1-12/1/0 C xyz 1   * - 1 1
+* GLOBAL_OA        $ROOT/MERCURY/v2018-04/OA_3Dglobal.geosfp.4x5.2013.nc        IJ_SOA_S__     2013/1-12/1/0 C xyz 1   * - 1 1
+* GLOBAL_OCEAN     $ROOT/MERCURY/v2018-04/ocean_fixed.nc                        ocean_conc     1985/1-12/1/0 C xyz 1   * - 1 1
 
 #==============================================================================
 # --- BrOx fields --
 #==============================================================================
 (((BrOx_GC
-* Br_GC      $ROOT/MERCURY/v2018-04/halogens.Johan.Mar16.2007.nc  IJ_24H_S__Br     2007/1-12/1/0 C xyz ppbv * - 1 1
-* BrO_GC     -                                              IJ_24H_S__BrO    -             - -   ppbv * - 1 1
+* Br_GC      $ROOT/MERCURY/v2018-04/halogens.Johan.Mar16.2007.nc IJ_24H_S__Br     2007/1-12/1/0 C xyz ppbv * - 1 1
+* BrO_GC     -                                                   IJ_24H_S__BrO    -             - -   ppbv * - 1 1
 )))BrOx_GC
 
 (((.not.BrOx_GC

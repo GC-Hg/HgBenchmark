@@ -10,7 +10,7 @@ pro plot_zonal_redox, FileName=FileName, $
                         NoPlot=NoPlot, $
                         _Extra=_Extra, $
                         OxBr, OxOH, OxO3, $
-                        Reduction, NetOx, $
+                        Reduction, NetOx, totOx, $
                         xmid, ymid
    
    ;---------------------------------------;
@@ -78,7 +78,9 @@ pro plot_zonal_redox, FileName=FileName, $
    OxOH = 0.
    OxBr = 0.
    OxO3 = 0.
+   totOx = 0.
    NetOx = 0.
+   
 
    for F=0L, nFiles-1L do begin
 
@@ -99,29 +101,34 @@ pro plot_zonal_redox, FileName=FileName, $
                              alt=[0, 20], Tau0=Tau0, $
                              xmid=xmid, ymid=ymid, zmid=zmid )
       ;eds assumes Br chemistry default
-      if (chemistry eq 'OHO3') then begin
-         s = ctm_get_datablock( OxOH1, 'PL-Hg2-$', tracer=2, $
+      s = ctm_get_datablock( OxOH1, 'PL-Hg2-$', tracer=2, $
                              FileName=FileName[F], Average=1, $
                              alt=[0, 20], Tau0=Tau0, $
                              xmid=xmid, ymid=ymid, zmid=zmid )
-         s = ctm_get_datablock( OxO31, 'PL-Hg2-$', tracer=3, $
+      s = ctm_get_datablock( OxO31, 'PL-Hg2-$', tracer=3, $
                              FileName=FileName[F], Average=1, $
                              alt=[0, 20], Tau0=Tau0 )
-         OxBr1 = 0d0
+      s = ctm_get_datablock( OxBr1, 'PL-Hg2-$', tracer=6, $
+                             FileName=FileName[F], Average=1, $
+                             alt=[0, 20], Tau0=Tau0 )
+      if ( chemistry eq 'BrY' ) then begin
+         s = ctm_get_datablock( OxBrY1, 'PL-Hg2-$', tracer=7, $
+                                FileName=FileName[F], Average=1, $
+                                alt=[0, 20], Tau0=Tau0 )
+         s = ctm_get_datablock( OxClY1, 'PL-Hg2-$', tracer=8, $
+                                FileName=FileName[F], Average=1, $
+                                alt=[0, 20], Tau0=Tau0 )
       endif else begin
-         s = ctm_get_datablock( OxBr1, 'PL-Hg2-$', tracer=6, $
-                             FileName=FileName[F], Average=1, $
-                             alt=[0, 20], Tau0=Tau0 )
-         OxO31 = 0d0
-         OxOH1 = 0d0
-      endelse ;eds
-
+         OxBrY1 = 0.
+         OxClY1 = 0.
+      endelse
 ;      if (s ne 1) then begin
 ;         print, 'No Hg(0)+Br found. Assuming zero...'
 ;         OxBr = 0
 ;      endif
 
-      Reduction1 = OxO31 + OxOH1 + OxBr1 - NetOx1
+      totOx1 = OxO31 + OxOH1 + OxBr1 + OxBrY1 + OxClY1
+      Reduction1 =  totOx1 - NetOx1
 
 ;to normalize to pmol/mol - commented out for now eds 5/13/11
       ; Mass of air per grid cell
@@ -145,18 +152,19 @@ pro plot_zonal_redox, FileName=FileName, $
      vol = ctm_boxsize( GridInfo, /volume, /m3 )
      vol = mean2( vol, 1)
       ; Convert kg -> kg/m3
-     OxO3 = OxO31/vol
-     OxOH = OxOH1/vol
-     OxBr = OxBr1/vol
-     Reduction = Reduction1/vol
-     NetOx = NetOx1/vol ;eds
+     OxO31 = OxO31/vol
+     OxOH1 = OxOH1/vol
+     OxBr1 = OxBr1/vol
+     totOx1 = totOx1/vol
+     Reduction1 = Reduction1/vol
+     NetOx1 = NetOx1/vol ;eds
 
      OxO3 = OxO3 + OxO31
      OxOH = OxOH + OxOH1
      OxBr = OxBr + OxBr1
+     totOx = totOx + totOx1
      Reduction = Reduction + Reduction1
      NetOx = NetOx + NetOx1
-
 
    endfor
    endfor
@@ -164,6 +172,7 @@ pro plot_zonal_redox, FileName=FileName, $
    OxO3 = OxO3 / nFiles
    OxOH = OxOH / nFiles
    OxBr = OxBr / nFiles
+   totOx = totOx / nFiles
    Reduction = Reduction / nFiles
 
    ; clear memory

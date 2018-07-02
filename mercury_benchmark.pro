@@ -535,23 +535,23 @@ PRO MERCURY_BENCHMARK, FILENAME=FILENAME, REFERENCE=REFERENCE, $
 
    ; COMPARISON TO DATA ;
 
-   plot_ocean_gem_data, filename=filename, ppq=ppq
+;   plot_ocean_gem_data, filename=filename, ppq=ppq
    
-   plot_ocean_aqu_data, filename=filename
+ ;  plot_ocean_aqu_data, filename=filename
 
 
    ; OCEAN HG0 ;
 
-   new_hg0aq = get_total_ocean_mass(filename=filename, $
-                species='hg0aq', $
-                total=new_tot_hg0aq)
+;   new_hg0aq = get_total_ocean_mass(filename=filename, $
+;                species='hg0aq', $
+;                total=new_tot_hg0aq)
 
-   old_hg0aq = get_total_ocean_mass(filename=reference, $
-                species='hg0aq', $
-                total=old_tot_hg0aq)
+;   old_hg0aq = get_total_ocean_mass(filename=reference, $
+;                species='hg0aq', $
+;                total=old_tot_hg0aq)
 
-   new_data = new_hg0aq
-   old_data = old_hg0aq
+;   new_data = new_hg0aq
+;   old_data = old_hg0aq
    new_title = 'New Model Version: Ocean Hg(0) Mass'
    old_title = 'Old Model Version: Ocean Hg(0) Mass'
    cbunit = 'kg'
@@ -562,22 +562,22 @@ PRO MERCURY_BENCHMARK, FILENAME=FILENAME, REFERENCE=REFERENCE, $
    color = 'white'
    cfill = 1L
 
-   hg_plot_diffs, new_data, old_data, new_title=new_title, old_title=old_title, $
-   cbunit=cbunit, abs_min=abs_min, abs_max=abs_max, diff_max=diff_max, $
-   perc_max=perc_max, color=color, cfill=cfill
+;   hg_plot_diffs, new_data, old_data, new_title=new_title, old_title=old_title, $
+;   cbunit=cbunit, abs_min=abs_min, abs_max=abs_max, diff_max=diff_max, $
+;   perc_max=perc_max, color=color, cfill=cfill
 
    ; OCEAN HG(II) ;
 
-   new_hg2aq = get_total_ocean_mass(filename=filename, $
-               	species='hg2aq', $
-               	total=new_tot_hg2aq)
+;   new_hg2aq = get_total_ocean_mass(filename=filename, $
+;               	species='hg2aq', $
+;               	total=new_tot_hg2aq)
 
-   old_hg2aq = get_total_ocean_mass(filename=reference, $
-                species='hg2aq', $
-               	total=old_tot_hg2aq)
+;   old_hg2aq = get_total_ocean_mass(filename=reference, $
+;                species='hg2aq', $
+;               	total=old_tot_hg2aq)
 
-   new_data = new_hg2aq
-   old_data = old_hg2aq
+ ;  new_data = new_hg2aq
+ ;  old_data = old_hg2aq
    new_title = 'New Model Version: Ocean Hg(II) Mass'
    old_title = 'Old Model Version: Ocean Hg(II) Mass'
    cbunit = 'kg'
@@ -588,22 +588,22 @@ PRO MERCURY_BENCHMARK, FILENAME=FILENAME, REFERENCE=REFERENCE, $
    color = 'white'
    cfill = 1L
 
-   hg_plot_diffs, new_data, old_data, new_title=new_title, old_title=old_title, $
-   cbunit=cbunit, abs_min=abs_min, abs_max=abs_max, diff_max=diff_max, $
-   perc_max=perc_max, color=color, cfill=cfill
+ ;  hg_plot_diffs, new_data, old_data, new_title=new_title, old_title=old_title, $
+ ;  cbunit=cbunit, abs_min=abs_min, abs_max=abs_max, diff_max=diff_max, $
+ ;  perc_max=perc_max, color=color, cfill=cfill
 
    ; OCEAN HG(P) ;
 
-   new_hgPaq = get_total_ocean_mass(filename=filename, $
-               	species='hgpaq', $
-               	total=new_tot_hgPaq)
+ ;  new_hgPaq = get_total_ocean_mass(filename=filename, $
+ ;              	species='hgpaq', $
+ ;              	total=new_tot_hgPaq)
 
-   old_hgPaq = get_total_ocean_mass(filename=reference, $
-                species='hgpaq', $
-               	total=old_tot_hgPaq)
+ ;  old_hgPaq = get_total_ocean_mass(filename=reference, $
+ ;               species='hgpaq', $
+ ;              	total=old_tot_hgPaq)
 
-   new_data = new_hgPaq
-   old_data = old_hgPaq
+ ;  new_data = new_hgPaq
+ ;  old_data = old_hgPaq
    new_title = 'New Model Version: Ocean Particulate Mass'
    old_title = 'Old Model Version: Ocean Particulate Mass'
    cbunit = 'kg'
@@ -614,22 +614,22 @@ PRO MERCURY_BENCHMARK, FILENAME=FILENAME, REFERENCE=REFERENCE, $
    color = 'white'
    cfill = 1L
 
-   hg_plot_diffs, new_data, old_data, new_title=new_title, old_title=old_title, $
-   cbunit=cbunit, abs_min=abs_min, abs_max=abs_max, diff_max=diff_max, $
-   perc_max=perc_max, color=color, cfill=cfill
+ ;  hg_plot_diffs, new_data, old_data, new_title=new_title, old_title=old_title, $
+ ;  cbunit=cbunit, abs_min=abs_min, abs_max=abs_max, diff_max=diff_max, $
+ ;  perc_max=perc_max, color=color, cfill=cfill
 
    ; OCEAN TOTAL HG ;
 
-   new_hgTaq = get_total_ocean_mass(filename=filename, $
-               	species='hgtaq', $
-               	total=new_tot_hgTaq)
+ ;  new_hgTaq = get_total_ocean_mass(filename=filename, $
+ ;              	species='hgtaq', $
+ ;              	total=new_tot_hgTaq)
 
-   old_hgTaq = get_total_ocean_mass(filename=reference, $
-                species='hgtaq', $
-               	total=old_tot_hgTaq)
+ ;  old_hgTaq = get_total_ocean_mass(filename=reference, $
+ ;               species='hgtaq', $
+ ;              	total=old_tot_hgTaq)
 
-   new_data = new_hgTaq
-   old_data = old_hgTaq
+ ;  new_data = new_hgTaq
+ ;  old_data = old_hgTaq
    new_title = 'New Model Version: Ocean Total Inorganic Hg Mass'
    old_title = 'Old Model Version: Ocean Total Inorganic Hg Mass'
    cbunit = 'kg'
@@ -640,9 +640,9 @@ PRO MERCURY_BENCHMARK, FILENAME=FILENAME, REFERENCE=REFERENCE, $
    color = 'white'
    cfill = 1L
 
-   hg_plot_diffs, new_data, old_data, new_title=new_title, old_title=old_title, $
-   cbunit=cbunit, abs_min=abs_min, abs_max=abs_max, diff_max=diff_max, $
-   perc_max=perc_max, color=color, cfill=cfill
+ ;  hg_plot_diffs, new_data, old_data, new_title=new_title, old_title=old_title, $
+ ;  cbunit=cbunit, abs_min=abs_min, abs_max=abs_max, diff_max=diff_max, $
+ ;  perc_max=perc_max, color=color, cfill=cfill
 
 
    ; GROSS EVASION ;
@@ -728,16 +728,16 @@ PRO MERCURY_BENCHMARK, FILENAME=FILENAME, REFERENCE=REFERENCE, $
 
    ; OCEAN HG SINKING ;
 
-   new_sink = get_total_emission(filename=filename, $
-                source='sink', species='Hg2', $
-                total=new_tot_sink)
+   ;new_sink = get_total_emission(filename=filename, $
+   ;             source='sink', species='Hg2', $
+   ;             total=new_tot_sink)
 
-   old_sink = get_total_emission(filename=reference, $
-                source='sink', species='Hg2', $
-                total=old_tot_sink)
+   ;old_sink = get_total_emission(filename=reference, $
+   ;             source='sink', species='Hg2', $
+   ;             total=old_tot_sink)
 
-   new_data = new_sink
-   old_data = old_sink
+   ;new_data = new_sink
+   ;old_data = old_sink
    new_title = 'New Model Version: Ocean Hg Sinking'
    old_title = 'Old Model Version: Ocean Hg Sinking'
    cbunit = 'kg/y'
@@ -748,9 +748,9 @@ PRO MERCURY_BENCHMARK, FILENAME=FILENAME, REFERENCE=REFERENCE, $
    color = 'white'
    cfill = 1L
 
-   hg_plot_diffs, new_data, old_data, new_title=new_title, old_title=old_title, $
-   cbunit=cbunit, abs_min=abs_min, abs_max=abs_max, diff_max=diff_max, $
-   perc_max=perc_max, color=color, cfill=cfill
+   ;hg_plot_diffs, new_data, old_data, new_title=new_title, old_title=old_title, $
+   ;cbunit=cbunit, abs_min=abs_min, abs_max=abs_max, diff_max=diff_max, $
+   ;perc_max=perc_max, color=color, cfill=cfill
 
    ;----------------------------------;
    ;                                  ;
@@ -759,88 +759,35 @@ PRO MERCURY_BENCHMARK, FILENAME=FILENAME, REFERENCE=REFERENCE, $
    ;----------------------------------;
 
    plot_zonal_redox, filename=filename, $
-       /noplot, chemistry=chemistry, $
+       /noplot, chemistry= 'BrY', $
        new_oxbr, new_oxoh, new_oho3, $
-       new_red, new_netox, new_xmid, new_ymid
+       new_red, new_netox, new_totox, new_xmid, new_ymid
 
    plot_zonal_redox, filename=reference, $
        /noplot, chemistry=chemistry, $
        old_oxbr, old_oxoh, old_oho3, $
-       old_red, old_netox, old_xmid, old_ymid
+       old_red, old_netox, old_totox, old_xmid, old_ymid
 
-   ; Net Oxidation
-
-   if (chemistry eq 'Br') then begin
-
-   absdiff = new_oxbr - old_oxbr
-   percdiff = 1d2*absdiff/old_oxbr
-   zeros = where(absdiff eq 0)
+   absdiff = new_totox - old_totox
+   percdiff = 1d2*absdiff/old_totox
+   zeros = where(old_totox eq 0)
    if zeros[0] ne -1 then begin
       percdiff(zeros) = 0 
    endif
 
    multipanel, rows=2, cols=2
    myct, /whgrylrd, ncolors=17
-   tvplot, new_oxbr, new_xmid, new_ymid, /sample, $
-           title='New Model Version: Zonal Gross Ox by Br', $
-           /ystyle, mindata=0, maxdata=40, $
+   tvplot, new_totox, new_xmid, new_ymid, /sample, $
+           title='New Model Version: Zonal Gross Ox', $
+           /ystyle, mindata=0, maxdata=1e-11, $
            xrange=[-90, 90], /xstyle, $
            xtitle='Latitude', ytitle='Altitude', $
            csfac=1, tcsfac=1, /cbar, div=5, $
            cbunit='kg/m!u3!n/y'
 
-   tvplot, old_oxbr, new_xmid, new_ymid, /sample, $
-           title='Old Model Version: Zonal Gross Ox by Br', $
-           /ystyle, mindata=0, maxdata=40, $
-           xrange=[-90, 90], /xstyle, $
-           xtitle='Latitude', ytitle='Altitude', $
-           csfac=1, tcsfac=1, /cbar, div=5, $
-           cbunit='kg/m!u3!n/y'
-
-   myct, /diff, ncolors=17
-   tvplot, absdiff, new_xmid, new_ymid, /sample, $
-           title='Absolute Difference', $
-           /ystyle, mindata=-5, maxdata=5, $
-           xrange=[-90, 90], /xstyle, $
-           xtitle='Latitude', ytitle='Altitude', $
-           csfac=1, tcsfac=1, /cbar, div=5, $
-           cbunit='kg/m!u3!n/y'
-
-   tvplot, percdiff, new_xmid, new_ymid, /sample, $
-           title='Percent Difference', $
-           /ystyle, mindata=-20, maxdata=20, $
-           xrange=[-90, 90], /xstyle, $
-           xtitle='Latitude', ytitle='Altitude', $
-           csfac=1, tcsfac=1, /cbar, div=5, $
-           cbunit='%'
-
-   multipanel, /off
-
- 
-
-
-   endif else begin
-
-   absdiff = new_oxoh - old_oxoh
-   percdiff = 1d2*absdiff/old_oxoh
-   zeros = where(absdiff eq 0)
-   if zeros[0] ne -1 then begin
-      percdiff(zeros) = 0 
-   endif
-
-   multipanel, rows=2, cols=2
-   myct, /whgrylrd, ncolors=17
-   tvplot, new_oxoh, new_xmid, new_ymid, /sample, $
-           title='New Model Version: Zonal Gross Ox by OH', $
-           /ystyle, mindata=0, maxdata=40, $
-           xrange=[-90, 90], /xstyle, $
-           xtitle='Latitude', ytitle='Altitude', $
-           csfac=1, tcsfac=1, /cbar, div=5, $
-           cbunit='kg/m!u3!n/y'
-
-   tvplot, old_oxoh, new_xmid, new_ymid, /sample, $
-           title='Old Model Version: Zonal Gross Ox by OH', $
-       	   /ystyle, mindata=0, maxdata=40, $
+   tvplot, old_totox, new_xmid, new_ymid, /sample, $
+           title='Old Model Version: Zonal Gross Ox', $
+       	   /ystyle, mindata=0, maxdata=1e-11, $
            xrange=[-90, 90], /xstyle, $
            xtitle='Latitude', ytitle='Altitude', $
            csfac=1, tcsfac=1, /cbar, div=5, $ 
@@ -849,7 +796,7 @@ PRO MERCURY_BENCHMARK, FILENAME=FILENAME, REFERENCE=REFERENCE, $
    myct, /diff, ncolors=17
    tvplot, absdiff, new_xmid, new_ymid, /sample, $
            title='Absolute Difference', $
-       	   /ystyle, mindata=-5, maxdata=5, $
+       	   /ystyle, mindata=-5e-12, maxdata=5e-12, $
            xrange=[-90, 90], /xstyle, $
            xtitle='Latitude', ytitle='Altitude', $
            csfac=1, tcsfac=1, /cbar, div=5, $ 
@@ -866,56 +813,9 @@ PRO MERCURY_BENCHMARK, FILENAME=FILENAME, REFERENCE=REFERENCE, $
    multipanel, /off
 
 
-   absdiff = new_oxo3 - old_oxo3
-   percdiff = 1d2*absdiff/old_oxo3
-   zeros = where(absdiff eq 0)
-   if zeros[0] ne -1 then begin
-      percdiff(zeros) = 0 
-   endif
-
-   multipanel, rows=2, cols=2
-   myct, /whgrylrd, ncolors=17
-   tvplot, new_oxo3, xmid, ymid, /sample, $
-           title='New Model Version: Zonal Gross Ox by O!d3!n', $
-           /ystyle, mindata=0, maxdata=40, $
-           xrange=[-90, 90], /xstyle, $
-           xtitle='Latitude', ytitle='Altitude', $
-           csfac=1, tcsfac=1, /cbar, div=5, $
-           cbunit='kg/m!u3!n/y'
-
-   tvplot, old_oxo3, xmid, ymid, /sample, $
-           title='Old Model Version: Zonal Gross Ox by O!d3!n', $
-           /ystyle, mindata=0, maxdata=40, $
-           xrange=[-90, 90], /xstyle, $
-           xtitle='Latitude', ytitle='Altitude', $
-           csfac=1, tcsfac=1, /cbar, div=5, $
-           cbunit='kg/m!u3!n/y'
-
-   myct, /diff, ncolors=17
-   tvplot, absdiff, xmid, ymid, /sample, $
-           title='Absolute Difference', $
-           /ystyle, mindata=-5, maxdata=5, $
-           xrange=[-90, 90], /xstyle, $
-           xtitle='Latitude', ytitle='Altitude', $
-           csfac=1, tcsfac=1, /cbar, div=5, $
-           cbunit='kg/m!u3!n/y'
-
-   tvplot, percdiff, xmid, ymid, /sample, $
-           title='Percent Difference', $
-           /ystyle, mindata=-20, maxdata=20, $
-           xrange=[-90, 90], /xstyle, $
-           xtitle='Latitude', ytitle='Altitude', $
-           csfac=1, tcsfac=1, /cbar, div=5, $
-           cbunit='%'
-
-   multipanel, /off
-
-
-   endelse
-
    absdiff = new_netox - old_netox
-   percdiff = 1d2*absdiff/old_netox
-   zeros = where(absdiff eq 0)
+   percdiff = 1d2*absdiff/abs(old_netox)
+   zeros = where(old_netox eq 0)
    if zeros[0] ne -1 then begin
       percdiff(zeros) = 0 
    endif
@@ -924,7 +824,7 @@ PRO MERCURY_BENCHMARK, FILENAME=FILENAME, REFERENCE=REFERENCE, $
    myct, /whgrylrd, ncolors=17
    tvplot, new_netox, xmid, ymid, /sample, $
            title='New Model Version: Zonal Net Oxidation', $
-           /ystyle, mindata=0, maxdata=40, $
+           /ystyle, mindata=0, maxdata=1e-11, $
            xrange=[-90, 90], /xstyle, $
            xtitle='Latitude', ytitle='Altitude', $
            csfac=1, tcsfac=1, /cbar, div=5, $
@@ -932,7 +832,7 @@ PRO MERCURY_BENCHMARK, FILENAME=FILENAME, REFERENCE=REFERENCE, $
 
    tvplot, old_netox, xmid, ymid, /sample, $
            title='Old Model Version: Zonal Net Oxidation', $
-           /ystyle, mindata=0, maxdata=40, $
+           /ystyle, mindata=0, maxdata=1e-11, $
            xrange=[-90, 90], /xstyle, $
            xtitle='Latitude', ytitle='Altitude', $
            csfac=1, tcsfac=1, /cbar, div=5, $
@@ -941,7 +841,7 @@ PRO MERCURY_BENCHMARK, FILENAME=FILENAME, REFERENCE=REFERENCE, $
    myct, /diff, ncolors=17
    tvplot, absdiff, xmid, ymid, /sample, $
            title='Absolute Difference', $
-           /ystyle, mindata=-5, maxdata=5, $
+           /ystyle, mindata=-5e-12, maxdata=5e-12, $
            xrange=[-90, 90], /xstyle, $
            xtitle='Latitude', ytitle='Altitude', $
            csfac=1, tcsfac=1, /cbar, div=5, $
@@ -959,7 +859,7 @@ PRO MERCURY_BENCHMARK, FILENAME=FILENAME, REFERENCE=REFERENCE, $
 
    absdiff = new_red - old_red
    percdiff = 1d2*absdiff/old_red
-   zeros = where(absdiff eq 0)
+   zeros = where(old_red eq 0)
    if zeros[0] ne -1 then begin
       percdiff(zeros) = 0 
    endif
@@ -968,7 +868,7 @@ PRO MERCURY_BENCHMARK, FILENAME=FILENAME, REFERENCE=REFERENCE, $
    myct, /whgrylrd, ncolors=17
    tvplot, new_red, xmid, ymid, /sample, $
            title='New Model Version: Zonal Gross Reduction', $
-           /ystyle, mindata=0, maxdata=40, $
+           /ystyle, mindata=0, maxdata=1e-11, $
            xrange=[-90, 90], /xstyle, $
            xtitle='Latitude', ytitle='Altitude', $
            csfac=1, tcsfac=1, /cbar, div=5, $
@@ -976,7 +876,7 @@ PRO MERCURY_BENCHMARK, FILENAME=FILENAME, REFERENCE=REFERENCE, $
 
    tvplot, old_red, xmid, ymid, /sample, $
            title='Old Model Version: Zonal Gross Reduction', $
-           /ystyle, mindata=0, maxdata=40, $
+           /ystyle, mindata=0, maxdata=1e-11, $
            xrange=[-90, 90], /xstyle, $
            xtitle='Latitude', ytitle='Altitude', $
            csfac=1, tcsfac=1, /cbar, div=5, $
@@ -985,7 +885,7 @@ PRO MERCURY_BENCHMARK, FILENAME=FILENAME, REFERENCE=REFERENCE, $
    myct, /diff, ncolors=17
    tvplot, absdiff, xmid, ymid, /sample, $
            title='Absolute Difference', $
-           /ystyle, mindata=-5, maxdata=5, $
+           /ystyle, mindata=-5e-12, maxdata=5e-12, $
            xrange=[-90, 90], /xstyle, $
            xtitle='Latitude', ytitle='Altitude', $
            csfac=1, tcsfac=1, /cbar, div=5, $
@@ -1009,7 +909,7 @@ PRO MERCURY_BENCHMARK, FILENAME=FILENAME, REFERENCE=REFERENCE, $
    ;                                  ;
    ;----------------------------------;
 
-    mercury_budget, filename, preind=preind, $
+    mercury_budget, filename, preind=preind, chemistry='BrY', $
     new_Hg0masstrop, new_Hg2masstrop, new_HgPmasstrop, $
     new_Hg0ocMass, new_Hg2ocMass, new_HgCocMass, $
     new_em_Hg0_anthro, new_em_Hg2_anthro, new_em_HgP_anthro, $
@@ -1019,9 +919,10 @@ PRO MERCURY_BENCHMARK, FILENAME=FILENAME, REFERENCE=REFERENCE, $
     new_Hg0DryD, new_Hg2DryD, new_HgPDryD, new_Hg2wet, new_HgPwet, $
     new_pl_Hg_seasalt, new_dep_total, new_pl_Hg_Br, $
     new_pl_Hg_OH, new_pl_Hg_O3, new_pl_Hg_reduction, $
-    new_t_Hg0chemtrop, new_t_Hg2chemtrop, new_t_TGMtrop
+    new_t_Hg0chemtrop, new_t_Hg2chemtrop, new_t_TGMtrop, $
+    new_pl_tot, new_pl_tot_trop
 
-    mercury_budget, reference, preind=preind, $
+    mercury_budget, reference, preind=preind, chemistry='Br',$
     old_Hg0masstrop, old_Hg2masstrop, old_HgPmasstrop, $
     old_Hg0ocMass, old_Hg2ocMass, old_HgCocMass, $
     old_em_Hg0_anthro, old_em_Hg2_anthro, old_em_HgP_anthro, $
@@ -1031,7 +932,8 @@ PRO MERCURY_BENCHMARK, FILENAME=FILENAME, REFERENCE=REFERENCE, $
     old_Hg0DryD, old_Hg2DryD, old_HgPDryD, old_Hg2wet, old_HgPwet, $
     old_pl_Hg_seasalt, old_dep_total, old_pl_Hg_Br, $
     old_pl_Hg_OH, old_pl_Hg_O3, old_pl_Hg_reduction, $
-    old_t_Hg0chemtrop, old_t_Hg2chemtrop, old_t_TGMtrop
+    old_t_Hg0chemtrop, old_t_Hg2chemtrop, old_t_TGMtrop, $
+    old_pl_tot, old_pl_tot_trop
 
    multipanel, rows=1, cols=1
 
@@ -1074,13 +976,9 @@ PRO MERCURY_BENCHMARK, FILENAME=FILENAME, REFERENCE=REFERENCE, $
    xyouts, 4.2, 6.9, string('Hg!u2!n seasalt:', string(old_pl_Hg_seasalt/1d3/ofiles,format='(I7.0)')), color=1
    xyouts, 4.2, 6.6, string('TOTAL DEPOSITION:', string(old_dep_total/1d3/ofiles,format='(I7.0)')), color=1
    xyouts, 4.2, 6.0, 'REDOX', color=1
-   if (chemistry eq 'Br') then begin
-   xyouts, 4.2, 5.7, string('Gross Ox by Br:', string(old_pl_Hg_Br/1d3/ofiles,format='(I7.0)')),color=1
-   endif else begin
-   xyouts, 4.2, 5.7, string('Gross Ox by OH+O!d3!n:', string((old_pl_Hg_OH+old_pl_Hg_O3)/1d3/ofiles,format='(I7.0)')),color=1
-   endelse
+   xyouts, 4.2, 5.7, string('Gross Ox:', string(old_pl_tot/1d3/ofiles,format='(I7.0)')),color=1
    xyouts, 4.2, 5.4, string('Gross Reduction:', string(old_pl_Hg_reduction/1d3/ofiles,format='(I7.0)')),color=1
-   xyouts, 4.2, 5.1, string('Net Oxidation', string((old_pl_Hg_Br-old_pl_Hg_reduction)/1d3/ofiles,format='(I7.0)')),color=1
+   xyouts, 4.2, 5.1, string('Net Oxidation', string((old_pl_tot-old_pl_Hg_reduction)/1d3/ofiles,format='(I7.0)')),color=1
 
 
    xyouts, 0.4+3.0, 9.5, 'NEW MODEL VERSION', color=2
@@ -1108,13 +1006,9 @@ PRO MERCURY_BENCHMARK, FILENAME=FILENAME, REFERENCE=REFERENCE, $
    xyouts, 0.4+6.0, 7.2, string(string(new_em_Hg0_oc_dn/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
    xyouts, 0.4+6.0, 6.9, string(string(new_pl_Hg_seasalt/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
    xyouts, 0.4+6.8, 6.6, string(string(new_dep_total/1d3/nfiles,format='(I10.0)'), '  Mg/y'), color=2
-   if (chemistry eq 'Br') then begin
-   xyouts, 0.4+6.5, 5.7, string(string(new_pl_Hg_Br/1d3/nfiles,format='(I10.0)'), '  Mg/y'),color=2
-   endif else begin
-   xyouts, 0.4+6.5, 5.7, string(string((new_pl_Hg_OH+new_pl_Hg_O3)/1d3/nfiles,format='(I10.0)'), '  Mg/y'),color=2
-   endelse
+   xyouts, 0.4+6.5, 5.7, string(string(new_pl_tot/1d3/nfiles,format='(I10.0)'), '  Mg/y'),color=2
    xyouts, 0.4+6.5, 5.4, string(string(new_pl_Hg_reduction/1d3/nfiles,format='(I10.0)'), '  Mg/y'),color=2
-   xyouts, 0.4+6.5, 5.1, string(string((new_pl_Hg_Br-new_pl_Hg_reduction)/1d3/nfiles,format='(I10.0)'), '  Mg/y'),color=2
+   xyouts, 0.4+6.5, 5.1, string(string((new_pl_tot-new_pl_Hg_reduction)/1d3/nfiles,format='(I10.0)'), '  Mg/y'),color=2
 
 
    multipanel, /off

@@ -242,7 +242,7 @@ end
 ;------------------------------------------------------------------------
 ; PRO MERCURY_BUDGET
 ;------------------------------------------------------------------------
-pro mercury_budget, file, preind=preind, $
+pro mercury_budget, file, preind=preind, chemistry=chemistry, $
     Hg0masstrop, Hg2masstrop, HgPmasstrop, $
     Hg0ocMass, Hg2ocMass, HgCocMass, $
     em_Hg0_anthro, em_Hg2_anthro, em_HgP_anthro, $
@@ -252,7 +252,8 @@ pro mercury_budget, file, preind=preind, $
     Hg0DryD, Hg2DryD, HgPDryD, Hg2wet, HgPwet, $
     pl_Hg_seasalt, dep_total, pl_Hg_Br, $
     pl_Hg_OH, pl_Hg_O3, pl_Hg_reduction, $
-    t_Hg0chemtrop, t_Hg2chemtrop, t_TGMtrop
+    t_Hg0chemtrop, t_Hg2chemtrop, t_TGMtrop, $
+    pl_tot, pl_tot_trop
 
 ;eds 5/13/11 modified to output values
 ;for mercury benchmark
@@ -315,6 +316,12 @@ pro mercury_budget, file, preind=preind, $
  t_Hg0chemtrop        = 0d0
  t_Hg2chemtrop        = 0d0
  t_TGMtrop            = 0d0
+ pl_tot               = 0d0
+ pl_Hg_BrY            = 0d0
+ pl_Hg_ClY            = 0d0
+ pl_tot_trop          = 0d0
+ pl_Hg_BrY_trop       = 0d0
+ pl_Hg_ClY_trop       = 0d0
 
  ; number of files
  nFiles =  n_elements(File)
@@ -475,19 +482,42 @@ pro mercury_budget, file, preind=preind, $
    pl_Hg_O3_temp      = combine_months( File=File[F],DiagN='PL-HG2-$', Tracer=3 )
    pl_Hg_seasalt_temp = combine_months( File=File[F],DiagN='PL-HG2-$', Tracer=4 )
 
+   if ( chemistry eq 'BrY' ) then begin
+      pl_Hg_BrY_temp = combine_months( File=File[F],DiagN='PL-HG2-$', Tracer=7 )
+
+      pl_Hg_ClY_temp = combine_months( File=File[F],DiagN='PL-HG2-$', Tracer=8 )
+   endif else begin
+      pl_Hg_BrY_temp = 0d0
+      pl_Hg_ClY_temp = 0d0
+   endelse
+
    pl_Hg_netox        = pl_Hg_netox   + pl_Hg_netox_temp
    pl_Hg_OH           = pl_Hg_OH      + pl_Hg_OH_temp
    pl_Hg_O3           = pl_Hg_O3      + pl_Hg_O3_temp
    pl_Hg_seasalt      = pl_Hg_seasalt + pl_Hg_seasalt_temp
+   pl_Hg_BrY          = pl_Hg_BrY + pl_Hg_BrY_temp
+   pl_Hg_ClY          = pl_Hg_ClY + pl_Hg_ClY_temp
 
    ; troposphere only
    pl_Hg_netox_trop_temp   = combine_months( File=File[F],DiagN='PL-HG2-$', Tracer=1, /trop)
    pl_Hg_OH_trop_temp      = combine_months( File=File[F],DiagN='PL-HG2-$', Tracer=2, /trop)
    pl_Hg_O3_trop_temp      = combine_months( File=File[F],DiagN='PL-HG2-$', Tracer=3, /trop)
 
+   if ( chemistry eq 'BrY' ) then begin
+      pl_Hg_BrY_trop_temp = combine_months( File=File[F],DiagN='PL-HG2-$', Tracer=7, /trop )
+
+      pl_Hg_ClY_trop_temp = combine_months( File=File[F],DiagN='PL-HG2-$', Tracer=8, /trop )
+   endif else begin
+      pl_Hg_BrY_trop_temp = 0d0
+      pl_Hg_ClY_trop_temp = 0d0
+   endelse
+
+
    pl_Hg_netox_trop        = pl_Hg_netox_trop + pl_Hg_netox_trop_temp
    pl_Hg_OH_trop           = pl_Hg_OH_trop    + pl_Hg_OH_trop_temp
    pl_Hg_O3_trop           = pl_Hg_O3_trop    + pl_Hg_O3_trop_temp
+   pl_Hg_BrY_trop          = pl_Hg_BrY_trop   + pl_Hg_BrY_trop_temp
+   pl_Hg_ClY_trop          = pl_Hg_ClY_trop   + pl_Hg_ClY_trop_temp
 
    if (BrDiagnostic) then begin
       pl_Hg_Br_temp       = combine_months( File=File[F], DiagN='PL-HG2-$', Tracer=6 )
@@ -497,14 +527,17 @@ pro mercury_budget, file, preind=preind, $
       pl_Hg_Br_trop       = pl_Hg_Br_trop + pl_Hg_Br_trop_temp
 
 ;      pl_Hg_reduction_temp      = pl_Hg_OH + pl_Hg_O3 + pl_Hg_Br - pl_Hg_netox
-;      pl_Hg_reduction_trop_temp = pl_Hg_OH_trop + pl_Hg_O3_trop + pl_Hg_Br_trop - pl_Hg_netox_trop
-      pl_Hg_reduction_temp      = pl_Hg_OH_temp + pl_Hg_O3_temp + pl_Hg_Br_temp - pl_Hg_netox_temp
-      pl_Hg_reduction_trop_temp = pl_Hg_OH_trop_temp + pl_Hg_O3_trop_temp + $
-                                  pl_Hg_Br_trop_temp - pl_Hg_netox_trop_temp
+;      pl_Hg_reduction_trop_temp = pl_Hg_OH_trop + pl_Hg_O3_trop +
+;      pl_Hg_Br_trop - pl_Hg_netox_trop
+      pl_tot_temp = pl_Hg_OH_temp + pl_Hg_O3_temp + pl_Hg_Br_temp + pl_Hg_BrY_temp + pl_Hg_ClY_temp
+      pl_tot_trop_temp = pl_Hg_OH_trop_temp + pl_Hg_O3_trop_temp + pl_Hg_Br_trop_temp + pl_Hg_BrY_trop_temp + pl_Hg_ClY_trop_temp
+      pl_Hg_reduction_temp      = pl_tot_temp - pl_Hg_netox_temp
+      pl_Hg_reduction_trop_temp = pl_tot_trop_temp - pl_Hg_netox_trop_temp
 
       pl_Hg_reduction           = pl_Hg_reduction      + pl_Hg_reduction_temp
       pl_Hg_reduction_trop      = pl_Hg_reduction_trop + pl_Hg_reduction_trop_temp
-
+      pl_tot  = pl_tot + pl_tot_temp
+      pl_tot_trop = pl_tot_trop + pl_tot_trop_temp
    endif else begin
 ;      pl_Hg_reduction_temp = pl_Hg_OH + pl_Hg_O3 - pl_Hg_netox
 ;      pl_Hg_reduction_trop_temp = pl_Hg_OH_trop + pl_Hg_O3_trop - pl_Hg_netox_trop

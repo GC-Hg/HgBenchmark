@@ -21,13 +21,18 @@ function get_geos_state, Variable, ModelInfo, Month, $
       'GEOS5_47L': year = 2007L
       'MERRA': year = 2008L
       'MERRA_47L': year = 2008L
-      'GEOSFP_47L': year = 2013L
+      'MERRA2_47L': year = 2008L
+      'GEOSFP_47L': year = 2008L
       else: message, 'No saved atmospheric data for GEOS type: '+ModelInfo.name
    endcase
 
 
    gc_dir = !BENCHMARK+'/GEOS-Chem_fields/'
- 
+
+   if ( ModelInfo.name eq 'MERRA2_47L' ) then $
+      ModelInfo.name = 'MERRA_47L'
+   if ( ModelInfo.name eq 'GEOSFP_47L' ) then $
+      ModelInfo.name = 'MERRA_47L'
    gc_file = gc_dir + $
              'state.'+ModelInfo.name +'.'+CTM_ResExt( ModelInfo )+'.%YYYY%.bpch'
    gc_file = replace_token( gc_file, 'YYYY', strtrim(string(year), 2))
